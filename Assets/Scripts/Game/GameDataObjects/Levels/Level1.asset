@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c273124e3337640bb8d1c39724c5a9, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  LevelNumber: 1
+  Elements:
+  - prefab: {fileID: 6129953561170106450, guid: f2cb662f696074b46bc0321271c76463,
+      type: 3}
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+  Npcs:
+  - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+    MovingSpeed: 0.25
+    FastMovingSpeed: 0.7
+    PatrollingRotation: -10
+    PatrollingStandingPeriod: 4
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: -0.15, y: 0, z: 2.85}
+    Sounds: []
+  - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+    MovingSpeed: 0.25
+    FastMovingSpeed: 0.7
+    PatrollingRotation: -10
+    PatrollingStandingPeriod: 2
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: -0.15, y: 0, z: 0.91}
+    Sounds: []
+  - prefab: {fileID: 1046869630431942, guid: c717f817a496cf247a92b830b355a407, type: 3}
+    MovingSpeed: 0.25
+    FastMovingSpeed: 0.7
+    PatrollingRotation: -10
+    PatrollingStandingPeriod: 2
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: 0.7, y: 0.2, z: -3}
+    Sounds: []
+  Conditions: []
