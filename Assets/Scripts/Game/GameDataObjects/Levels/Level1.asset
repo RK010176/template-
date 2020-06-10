@@ -47,3 +47,7 @@ MonoBehaviour:
     SpawnPoint: {x: 0.7, y: 0.2, z: -3}
     Sounds: []
   Conditions: []
+  PlayerSpecs:
+    MovingSpeed: 0
+    SpawnPoint: {x: 0, y: 0, z: 0}
+    Sounds: []

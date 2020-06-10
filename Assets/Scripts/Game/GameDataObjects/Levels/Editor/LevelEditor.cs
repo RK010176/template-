@@ -14,10 +14,7 @@ public class LevelEditor : Editor
 
     public override void OnInspectorGUI()
     {
-
-        #region Header
-
-        // top Header
+        #region Header        
         originalGUIColor = GUI.color;
         EditorGUIUtility.labelWidth = 250;
         EditorGUILayout.Space();
@@ -26,33 +23,21 @@ public class LevelEditor : Editor
         EditorGUILayout.LabelField("Level Editor Window", EditorStyles.boldLabel);
         GUI.color = originalGUIColor;
         // Header's paragraph
-        EditorGUILayout.LabelField("set level NPC's ,Elements ,Player ,Conditions ", EditorStyles.helpBox);
+        EditorGUILayout.LabelField("set level NPC's ,Game Elements ,Player ,Conditions ", EditorStyles.helpBox);
         GUI.color = originalGUIColor;
         EditorGUILayout.Space();
-        EditorGUILayout.Space();
+        //EditorGUILayout.Space();
+        #endregion
 
+        #region Init serializedObject 
+        _level = (Level)target;
+        SerializedObject serializedObject = new SerializedObject(_level);
+        serializedObject.Update();
         #endregion
 
         EditorGUI.indentLevel++;
 
-        // Open ScrollView -------------------------------------------------
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
-
-        base.OnInspectorGUI();
-
-        #region Levels
-        _level = (Level)target;
-        SerializedObject serializedObject = new SerializedObject(_level);
-        serializedObject.Update();
-
-        //SerializedProperty serializedPropertyList = serializedObject.FindProperty("levels");
-        //Draw(serializedPropertyList);
-        #endregion
-
-
-        EditorGUILayout.Space();
-
-        #region General Settings - section
+        #region Settings - section
         //___________________________________________________________________________________________________
 
         //// fold GeneralSettings section
@@ -64,7 +49,7 @@ public class LevelEditor : Editor
         EditorGUILayout.BeginVertical(GUI.skin.box);
 
         GUI.color = new Color(.75f, 1f, .75f);
-        GUILayout.Label("General Settings", EditorStyles.boldLabel);
+        GUILayout.Label("Settings", EditorStyles.boldLabel);
 
         GUI.color = originalGUIColor;
         // Value- overrideFixedTimeStep
@@ -90,9 +75,71 @@ public class LevelEditor : Editor
         EditorGUILayout.EndVertical();
         //}
         #endregion
+        
+
+        // Open ScrollView -------------------------------------------------
+        scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
+
+        //base.OnInspectorGUI();
+
+        
+        EditorGUILayout.BeginVertical(GUI.skin.button);
+        GUI.color = new Color(.75f, 1f, .75f);
+        //GUI.color = new Color(.5f, 1f, 1f, 1f);
+
+        #region NPCs
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        GUI.color = new Color(.75f, 1f, .75f);
+        GUILayout.Label("Set Non Playable Characters", EditorStyles.boldLabel);
+        GUI.color = originalGUIColor;
+        SerializedProperty serializedPropertyList = serializedObject.FindProperty("Npcs");
+        Draw(serializedPropertyList);
+        EditorGUILayout.EndVertical();
+        #endregion
+
+        #region Elements
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        GUI.color = new Color(.75f, 1f, .75f);
+        GUILayout.Label("Set Elements", EditorStyles.boldLabel);
+        GUI.color = originalGUIColor;
+        serializedPropertyList = serializedObject.FindProperty("Elements");
+        Draw(serializedPropertyList);
+        EditorGUILayout.EndVertical();
+        #endregion
+
+        #region Conditions
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        GUI.color = new Color(.75f, 1f, .75f);
+        GUILayout.Label("Set Conditions", EditorStyles.boldLabel);
+        GUI.color = originalGUIColor;
+        serializedPropertyList = serializedObject.FindProperty("Conditions");
+        Draw(serializedPropertyList);
+        EditorGUILayout.EndVertical();
+        #endregion
+
+        #region PlayerSpecs
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        GUI.color = new Color(.75f, 1f, .75f);
+        GUILayout.Label("Set Player specifications", EditorStyles.boldLabel);
+        GUI.color = originalGUIColor;
+        serializedPropertyList = serializedObject.FindProperty("PlayerSpecs");
+        Draw(serializedPropertyList);
+        EditorGUILayout.EndVertical();
+        #endregion
+        
+
+
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.Space();
+        GUI.color = originalGUIColor;
+
 
         EditorGUILayout.EndScrollView();
         // Close ScrollView -------------------------------------------------
+
+        
+
         #region footer
 
         EditorGUILayout.BeginVertical(GUI.skin.button);
@@ -100,7 +147,7 @@ public class LevelEditor : Editor
         GUI.color = new Color(.5f, 1f, 1f, 1f);
 
         // reset button
-        if (GUILayout.Button("U"))
+        if (GUILayout.Button("Test Level"))
         {
             //ResetToDefaults();
             //Debug.Log("Resetted To Defaults!");
@@ -113,7 +160,7 @@ public class LevelEditor : Editor
         }
 
         GUI.color = originalGUIColor;
-        EditorGUILayout.LabelField("Application", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
+        EditorGUILayout.LabelField("Level", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(20f));
 
         #endregion
 
@@ -123,13 +170,12 @@ public class LevelEditor : Editor
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
             EditorUtility.SetDirty(_level);
-
     }
 
     private void Draw(SerializedProperty list)
     {
         EditorGUILayout.PropertyField(list);
-        ShowElements(list);
+        //ShowElements(list);
     }
 
     private void ShowElements(SerializedProperty list, bool showElementLabels = true)

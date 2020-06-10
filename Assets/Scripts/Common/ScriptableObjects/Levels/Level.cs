@@ -13,6 +13,7 @@ namespace Common
         public List<Elements> Elements = new List<Elements>();
         public List<NpcBehaviors> Npcs = new List<NpcBehaviors>();
         public List<Conditions> Conditions = new List<Conditions>();
+        public PlayerSpecs PlayerSpecs = new PlayerSpecs();
     }
     
     [Serializable]
@@ -45,6 +46,14 @@ namespace Common
     public class Conditions
     {
 
+    }
+
+    [Serializable]
+    public class PlayerSpecs
+    {
+        public float MovingSpeed;                                       
+        public Vector3 SpawnPoint;
+        public List<AudioClip> Sounds;
     }
 
 }

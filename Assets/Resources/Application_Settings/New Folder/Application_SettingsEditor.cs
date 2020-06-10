@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -54,7 +53,7 @@ public class Application_SettingsEditor : Editor
         EditorGUIUtility.labelWidth = 250;
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Application Asset Settings Editor Window", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Application Asset Settings Editor", EditorStyles.boldLabel);
         GUI.color = new Color(.75f, 1f, .75f);
 
         // Header's paragraph
@@ -64,12 +63,13 @@ public class Application_SettingsEditor : Editor
 
         #endregion
 
+        // move text to right
         EditorGUI.indentLevel++;
 
         // Open ScrollView -------------------------------------------------
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
 
-
+        // row space
         EditorGUILayout.Space();
 
         #region General Settings - section
@@ -81,7 +81,7 @@ public class Application_SettingsEditor : Editor
         if (foldGeneralSettings)
         {
             // outer box
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical(GUI.skin.box); // must add EndVertical()
 
             GUI.color = new Color(.75f, 1f, .75f);
             GUILayout.Label("General Settings", EditorStyles.boldLabel);
@@ -252,7 +252,7 @@ public class Application_SettingsEditor : Editor
         // Close ScrollView -------------------------------------------------
         #region footer
 
-        EditorGUILayout.BeginVertical(GUI.skin.button);
+        EditorGUILayout.BeginVertical(GUI.skin.button); // -> must have !!!!  EditorGUILayout.EndVertical();
         GUI.color = new Color(.75f, 1f, .75f);
         GUI.color = new Color(.5f, 1f, 1f, 1f);
 
@@ -262,7 +262,7 @@ public class Application_SettingsEditor : Editor
             //ResetToDefaults();
             Debug.Log("Resetted To Defaults!");
         }
-        // pdf button
+        // url button
         if (GUILayout.Button("Browse Site"))
         {
             string url = "http://www.google.com";
@@ -270,7 +270,7 @@ public class Application_SettingsEditor : Editor
         }
 
         GUI.color = originalGUIColor;
-        EditorGUILayout.LabelField("Application", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
+        EditorGUILayout.LabelField("GAME NAME", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
 
         #endregion
 

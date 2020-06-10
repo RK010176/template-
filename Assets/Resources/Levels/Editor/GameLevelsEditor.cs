@@ -22,7 +22,7 @@ public class GameLevelsEditor : Editor
         EditorGUIUtility.labelWidth = 250;
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Game Levels", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Game Levels Window", EditorStyles.boldLabel);
         GUI.color = new Color(.75f, 1f, .75f);
 
         // Header's paragraph
@@ -38,7 +38,6 @@ public class GameLevelsEditor : Editor
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
 
 
-
         #region FoldLevels - section
         //___________________________________________________________________________________________________
 
@@ -51,8 +50,9 @@ public class GameLevelsEditor : Editor
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
             GUI.color = new Color(.75f, 1f, .75f);
-            GUILayout.Label("General Settings", EditorStyles.boldLabel);
+            GUILayout.Label("Set Levels", EditorStyles.boldLabel);
 
+            GUI.color = originalGUIColor;
             #region Levels
             levels = (Levels)target;
             SerializedObject serializedObject = new SerializedObject(levels);
@@ -90,7 +90,7 @@ public class GameLevelsEditor : Editor
         }
 
         GUI.color = originalGUIColor;
-        EditorGUILayout.LabelField("Application", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
+        EditorGUILayout.LabelField("Levels", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(20f));
         #endregion
 
         EditorGUILayout.EndVertical();
@@ -98,7 +98,7 @@ public class GameLevelsEditor : Editor
 
     private void Draw(SerializedProperty list)
     {
-        EditorGUILayout.PropertyField(list);
+        //EditorGUILayout.PropertyField(list);
 
         if (list.isExpanded)
         {
@@ -119,22 +119,8 @@ public class GameLevelsEditor : Editor
             AssetDatabase.SaveAssets();
 
         }
-
-        //if (GUILayout.Button("Add Item Quest", GUILayout.ExpandWidth(false)))
-        //{
-        //    if (!list.isExpanded)
-        //        list.isExpanded = true;
-
-        //    ItemQuest itemquest = ScriptableObject.CreateInstance<ItemQuest>();
-        //    itemquest.name = "New ItemQuest";
-        //    questLog.Quests.Add(itemquest);
-
-        //    AssetDatabase.AddObjectToAsset(itemquest, questLog);
-        //    AssetDatabase.SaveAssets();
-
-        //}
+        
     }
-
     private void ShowElements(SerializedProperty list, bool showElementLabels = true)
     {
         for (int i = 0; i < list.arraySize; i++)
