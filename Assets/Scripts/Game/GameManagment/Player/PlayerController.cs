@@ -2,22 +2,41 @@
 using System.Collections;
 using UnityEngine;
 using Common;
+using System.Collections.Generic;
 
 namespace Game
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayer
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private FloatVal _runningSpeed;
+        public PlayerSpecs PlayerSpecs { get; set; }        
+        private float _movingSpeed;
+        private List<AudioClip> _sounds;
+        private AudioSource _audioSource;
+        
         [SerializeField] private Item _prefabs;
+                                
         private IPlayerInput _playerInput;
         private float _resetTime = 0;
 
         private void Awake()
         {
+            _audioSource = GetComponent<AudioSource>();
             _playerInput = GetComponent<IPlayerInput>();
             _playerInput.OnFire += Fire;
         }
+
+        private void Start()
+        {
+            GetLavelData();
+        }
+        public void GetLavelData()
+        {
+            _movingSpeed = PlayerSpecs.MovingSpeed;                                                        
+            _sounds = PlayerSpecs.Sounds;
+        }
+
+
 
         private void Update()
         {
@@ -25,7 +44,8 @@ namespace Game
             if (_playerInput.Up)
             {
                 _animator.SetBool("Run", true);
-                transform.position += transform.forward * _runningSpeed.Value * Time.deltaTime *1;
+                transform.position += transform.forward * _movingSpeed * Time.deltaTime *1;
+                Play1();
             }
             else
                 _animator.SetBool("Run", false);
@@ -52,7 +72,7 @@ namespace Game
             if (_playerInput.SpaceBar)
             {
                 _animator.SetBool("Jump", true);
-                transform.position += transform.forward * _runningSpeed.Value / 2 * Time.deltaTime;
+                transform.position += transform.forward * _movingSpeed / 2 * Time.deltaTime;
             }
             else
                 _animator.SetBool("Jump", false);
@@ -80,6 +100,7 @@ namespace Game
             {
                 Instantiate(_prefabs.GameObject, transform.position, transform.rotation);
                 StartCoroutine(FinishAction());
+                Play2();
             }
         }
 
@@ -89,5 +110,26 @@ namespace Game
             yield return new WaitForSeconds(1);
             _oneShot = true;
         }
+
+        #region Sounds
+        private void Play1()
+        {
+            _audioSource.clip = _sounds[0];
+            _audioSource.loop = false;
+            _audioSource.Play();
+        }
+        private void Play2()
+        {
+            _audioSource.clip = _sounds[1];
+            _audioSource.loop = false;
+            _audioSource.Play();
+        }
+        private void Play3()
+        {
+            _audioSource.clip = _sounds[2];
+            _audioSource.loop = false;
+            _audioSource.Play();
+        }
+        #endregion
     }
 }

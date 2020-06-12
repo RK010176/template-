@@ -60,7 +60,8 @@ namespace App
         private void EnableCamAndLight()
         {
             _camera.gameObject.SetActive(true);
-            _light.gameObject.SetActive(true);
+            if(_light != null)
+                _light.gameObject.SetActive(true);
         }
 
         private void UnLoadingFinish(string scene)

@@ -49,7 +49,7 @@ namespace Common
     }
 
     [Serializable]
-    public class PlayerSpecs
+    public class PlayerSpecs : LevelObjects
     {
         public float MovingSpeed;                                       
         public Vector3 SpawnPoint;

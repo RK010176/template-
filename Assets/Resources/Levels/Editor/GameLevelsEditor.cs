@@ -39,9 +39,7 @@ public class GameLevelsEditor : Editor
 
 
         #region FoldLevels - section
-        //___________________________________________________________________________________________________
-
-        // fold GeneralSettings section
+        //___________________________________________________________________________________________________        
         FoldLevels = EditorGUILayout.Foldout(FoldLevels, "Levels");
 
         if (FoldLevels)
@@ -112,7 +110,7 @@ public class GameLevelsEditor : Editor
                 list.isExpanded = true;
 
             Level level = ScriptableObject.CreateInstance<Level>();
-            level.name = "New Level";
+            level.name = "Level"+(list.arraySize+1).ToString();
             levels.levels.Add(level);
 
             AssetDatabase.AddObjectToAsset(level, levels);

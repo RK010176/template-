@@ -9,6 +9,7 @@ public class Application_SettingsEditor : Editor
     Application_Settings Application_SettingsAssets;
     Color originalGUIColor;
     Vector2 scrollPos;
+    private Texture2D _logo = null;
 
 
     #region related to UI bounding boxs folding (Saves Last folding status)
@@ -26,6 +27,7 @@ public class Application_SettingsEditor : Editor
         foldUISettings = Application_Settings.Instance.foldUISettings;
         foldOptimization = Application_Settings.Instance.foldOptimization;
         foldTagsAndLayers = Application_Settings.Instance.foldTagsAndLayers;
+        _logo = (Texture2D)Resources.Load("logo", typeof(Texture2D));
     }
 
     void OnDestroy()
@@ -272,6 +274,13 @@ public class Application_SettingsEditor : Editor
         GUI.color = originalGUIColor;
         EditorGUILayout.LabelField("GAME NAME", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(50f));
 
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Box(_logo);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        EditorGUILayout.Space();
+
         #endregion
 
         EditorGUILayout.EndVertical();
@@ -290,7 +299,7 @@ public class Application_SettingsEditor : Editor
         Application_SettingsAssets.fixedTimeStep = .02f;
         Application_SettingsAssets.maxAngularVelocity = 6f;
         Application_SettingsAssets.behaviorType = Application_Settings.BehaviorType.A;
-        
+
         Application_SettingsAssets.Bool1 = true;
         Application_SettingsAssets.Bool2 = true;
         Application_SettingsAssets.Bool3 = true;
@@ -298,15 +307,15 @@ public class Application_SettingsEditor : Editor
         Application_SettingsAssets.Bool5 = true;
         Application_SettingsAssets.units = Application_Settings.Units.cm;
         Application_SettingsAssets.uiType = Application_Settings.UIType.NGUI;
-        
+
         Application_SettingsAssets.UIButtonSensitivity = 3f;
         Application_SettingsAssets.UIButtonGravity = 5f;
         Application_SettingsAssets.gyroSensitivity = 2f;
-        
+
         Application_SettingsAssets.foldGeneralSettings = false;
         Application_SettingsAssets.foldControllerSettings = false;
         Application_SettingsAssets.foldUISettings = false;
-        
+
         Application_SettingsAssets.foldOptimization = false;
     }
 

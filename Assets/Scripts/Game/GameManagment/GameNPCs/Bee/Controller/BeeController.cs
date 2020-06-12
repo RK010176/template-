@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Common;
 
 namespace Game
@@ -14,15 +15,18 @@ namespace Game
         private float _attackRadius;
         private float _period;
         private float _patrollingRotation;
-
+        private List<AudioClip> _sounds;
+        private AudioSource _audioSource;
         private void Awake()
         {
             _stateMachine = new StateMachine();
+            _audioSource = GetComponent<AudioSource>();
         }
         void Start()
         {
             GetLavelData();
             _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed));
+            Play1();
         }
         public void GetLavelData()
         {
@@ -32,6 +36,7 @@ namespace Game
             _attackRadius = NpcBehaviors.AttackRadios;
             _period = NpcBehaviors.PatrollingStandingPeriod;
             _patrollingRotation = NpcBehaviors.PatrollingRotation;
+            _sounds = NpcBehaviors.Sounds;
         }
 
         private Vector3 _playerPosition;
@@ -66,7 +71,6 @@ namespace Game
             }
         }
 
-
         private void BeeBrain(Vector3 _playerPosition)
         {
             if (_playerPosition == Vector3.zero)// -> no player found
@@ -88,56 +92,34 @@ namespace Game
             }
         }
 
-
-
-
         #region States functions
         private void BeePatrol()
         {
             if (_stateMachine.GetCurrentState() != "Game.BeePatrol")
-                _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed)); Play1(); }
         }
         private void MoveFast(Vector3 _playerPosition)
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeMoveFast")
-                _stateMachine.SetState(new BeeMoveFast(transform, _animator, _fastMovingSpeed));
-            NPCRotateToTarget(_playerPosition);
-            //_isPlayer = false;
+            { _stateMachine.SetState(new BeeMoveFast(transform, _animator, _fastMovingSpeed)); Play2(); };
+            NPCRotateToTarget(_playerPosition);           
         }
-
-        //private void PatrolOrStand()
-        //{
-        //    if (_stateMachine.GetCurrentState() != "Game.BeePatrol")
-        //        _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed));
-        //}
-
         private void Walk(Vector3 FoodrPos)
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeMove")
-                _stateMachine.SetState(new BeeMove(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new BeeMove(transform, _animator, _movingSpeed)); Play1(); }
             NPCRotateToTarget(FoodrPos);
         }
-
-        //private void EatOrStand()
-        //{
-        //    if (_stateMachine.GetCurrentState() != "Game.Eating" && !_stroll)
-        //        _stateMachine.SetState(new Eating(transform, _animator, _movingSpeed));
-        //    if (_stateMachine.GetCurrentState() != "Game..Standing" && _stroll)
-        //        _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed));
-        //}
-
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.transform.tag == "Player")
                 _isPlayer = true;            
         }
-
         private void Attack()
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeAttack")
-                _stateMachine.SetState(new BeeAttack(transform, _animator));
+            { _stateMachine.SetState(new BeeAttack(transform, _animator)); Play3(); }
         }
-
         private void NPCRotateToTarget(Vector3 TargetPosition)
         {
             var lookPos = transform.position - TargetPosition;
@@ -145,6 +127,27 @@ namespace Game
             transform.rotation = Quaternion.LookRotation(-lookPos);
         }
 
+        #endregion
+
+        #region Sounds
+        private void Play1()
+        {
+            _audioSource.clip = _sounds[0];
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
+        private void Play2()
+        {
+            _audioSource.clip = _sounds[1];
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
+        private void Play3()
+        {
+            _audioSource.clip = _sounds[2];
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
         #endregion
     }
 }

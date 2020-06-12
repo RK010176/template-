@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Common;
 
 namespace Game
@@ -13,11 +14,13 @@ namespace Game
         private float _searchRadius;
         private float _attackRadius;
         private float _period;
-        private float _patrollingRotation;       
-
+        private float _patrollingRotation;
+        private List<AudioClip> _sounds;
+        private AudioSource _audioSource;
         private void Awake()
         {
-            _stateMachine = new StateMachine();            
+            _stateMachine = new StateMachine();
+            _audioSource = GetComponent<AudioSource>();
         }
         
         // Chicken Strolling around on start
@@ -34,7 +37,8 @@ namespace Game
             _searchRadius = NpcBehaviors.SearchRadius;
             _attackRadius = NpcBehaviors.AttackRadios;
             _period = NpcBehaviors.PatrollingStandingPeriod;
-            _patrollingRotation = NpcBehaviors.PatrollingRotation;            
+            _patrollingRotation = NpcBehaviors.PatrollingRotation;
+            _sounds = NpcBehaviors.Sounds;
         }
         
         private Vector3 _playerPosition;
@@ -100,35 +104,33 @@ namespace Game
 
         #region States functions
         private void Patrol()
-        {
-            _stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed));
-        }
+        {_stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed));Play1();}
         private void Run(Vector3 _playerPosition)
         {
             if (_state != "Game.Running")
-                _stateMachine.SetState(new Running(transform, _animator, _fastMovingSpeed));
+            {_stateMachine.SetState(new Running(transform, _animator, _fastMovingSpeed));Play2();}
             NPCRotateToTarget(_playerPosition);
-            _isFood = false;
+            _isFood = false;            
         }
         private void PatrolOrStand()
-        {                      
+        {
             if (_state != "Game.Patrol" && !_stroll)
-                _stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed)); Play1(); }
             if (_state != "Game.Standing" && _stroll)
-                _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed)); Play1(); }            
         }
         private void Walk(Vector3 FoodrPos)
         {
             if (_state != "Game.Walking")
-                _stateMachine.SetState(new Walking(transform, _animator, _fastMovingSpeed));
-            NPCRotateToTarget(FoodrPos);
+            {_stateMachine.SetState(new Walking(transform, _animator, _fastMovingSpeed));Play1();}
+            NPCRotateToTarget(FoodrPos);            
         }
         private void EatOrStand()
         {
             if (_state != "Game.Eating" && !_stroll)
-                _stateMachine.SetState(new Eating(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new Eating(transform, _animator, _movingSpeed)); Play1(); }
             if (_state != "Game.Standing" && _stroll)
-                _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed));
+            { _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed)); Play1(); }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -146,6 +148,22 @@ namespace Game
 
 
         #endregion
+
+        #region Sounds
+        private void Play1()
+        {
+            _audioSource.clip = _sounds[0];
+            _audioSource.loop = false;
+            _audioSource.Play();
+        }
+        private void Play2()
+        {
+            _audioSource.clip = _sounds[1];
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
+        #endregion
+
     }
 
 }

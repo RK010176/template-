@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c273124e3337640bb8d1c39724c5a9, type: 3}
-  m_Name: Level1
+  m_Name: Level11 - saved for ref
   m_EditorClassIdentifier: 
-  LevelNumber: 1
+  LevelNumber: 11
   Elements:
   - prefab: {fileID: 6129953561170106450, guid: f2cb662f696074b46bc0321271c76463,
       type: 3}
@@ -27,7 +27,9 @@ MonoBehaviour:
     SearchRadius: 2
     AttackRadios: 2
     SpawnPoint: {x: -0.15, y: 0, z: 2.85}
-    Sounds: []
+    Sounds:
+    - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
+    - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
   - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
     MovingSpeed: 0.25
     FastMovingSpeed: 0.7
@@ -36,7 +38,9 @@ MonoBehaviour:
     SearchRadius: 2
     AttackRadios: 2
     SpawnPoint: {x: -0.15, y: 0, z: 0.91}
-    Sounds: []
+    Sounds:
+    - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
+    - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
   - prefab: {fileID: 1046869630431942, guid: c717f817a496cf247a92b830b355a407, type: 3}
     MovingSpeed: 0.25
     FastMovingSpeed: 0.7
@@ -50,4 +54,7 @@ MonoBehaviour:
   PlayerSpecs:
     MovingSpeed: 0
     SpawnPoint: {x: 0, y: 0, z: 0}
-    Sounds: []
+    Sounds:
+    - {fileID: 8300000, guid: a830f38b0b281f040b0de0cf1214b35b, type: 3}
+    - {fileID: 8300000, guid: f8b602cbbbfb6934b8d1b89e271c7cfd, type: 3}
+    - {fileID: 8300000, guid: 132de643d725fb24db6ae751ab85292f, type: 3}

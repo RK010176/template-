@@ -25,8 +25,7 @@ public class LevelEditor : Editor
         // Header's paragraph
         EditorGUILayout.LabelField("set level NPC's ,Game Elements ,Player ,Conditions ", EditorStyles.helpBox);
         GUI.color = originalGUIColor;
-        EditorGUILayout.Space();
-        //EditorGUILayout.Space();
+        EditorGUILayout.Space();        
         #endregion
 
         #region Init serializedObject 
@@ -53,7 +52,7 @@ public class LevelEditor : Editor
 
         GUI.color = originalGUIColor;
         // Value- overrideFixedTimeStep
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("LevelNumber"), new GUIContent("Level Number"));
+        //EditorGUILayout.PropertyField(serializedObject.FindProperty("LevelNumber"), new GUIContent("Level Number"));
 
         //    // Value- fixedTimeStep
         //    if (_level.overrideFixedTimeStep)
@@ -76,17 +75,15 @@ public class LevelEditor : Editor
         //}
         #endregion
         
-
+        
         // Open ScrollView -------------------------------------------------
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
 
         //base.OnInspectorGUI();
 
         
-        EditorGUILayout.BeginVertical(GUI.skin.button);
-        GUI.color = new Color(.75f, 1f, .75f);
-        //GUI.color = new Color(.5f, 1f, 1f, 1f);
-
+        EditorGUILayout.BeginVertical(GUI.skin.button);  // -> start vertical 
+        
         #region NPCs
         EditorGUILayout.BeginVertical(GUI.skin.box);
         GUI.color = new Color(.75f, 1f, .75f);
@@ -127,13 +124,10 @@ public class LevelEditor : Editor
         EditorGUILayout.EndVertical();
         #endregion
         
-
-
-        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndVertical();                   // -> end vertical 
 
         EditorGUILayout.Space();
-        GUI.color = originalGUIColor;
-
+        GUI.color = originalGUIColor; // back to original color 
 
         EditorGUILayout.EndScrollView();
         // Close ScrollView -------------------------------------------------
@@ -174,7 +168,7 @@ public class LevelEditor : Editor
 
     private void Draw(SerializedProperty list)
     {
-        EditorGUILayout.PropertyField(list);
+        EditorGUILayout.PropertyField(list);        
         //ShowElements(list);
     }
 
@@ -186,6 +180,7 @@ public class LevelEditor : Editor
             if (showElementLabels)
             {
                 EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i));
+                //if(list.  // == typeof(AudioClip))
             }
             else
             {
