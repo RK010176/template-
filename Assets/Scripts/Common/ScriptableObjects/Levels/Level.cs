@@ -32,7 +32,8 @@ namespace Common
         public float SearchRadius;
         public float AttackRadios;
         public Vector3 SpawnPoint;
-        public List<AudioClip> Sounds;        
+        public List<AudioClip> Sounds;
+        public float Health;
     }
 
     [Serializable]
@@ -54,6 +55,7 @@ namespace Common
         public float MovingSpeed;                                       
         public Vector3 SpawnPoint;
         public List<AudioClip> Sounds;
+        public float Health;
     }
 
 }

@@ -15,7 +15,7 @@ namespace Game
 
         public void Enter()
         {
-            Debug.Log("Bee Attacking");
+            //Debug.Log("Bee Attacking");
         }
 
         public void Execute()

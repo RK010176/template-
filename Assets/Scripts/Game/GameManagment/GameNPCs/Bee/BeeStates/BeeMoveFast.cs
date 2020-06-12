@@ -17,7 +17,7 @@ namespace Game
         }
         public void Enter()
         {
-            Debug.Log("Bee Moving Fast");
+            //Debug.Log("Bee Moving Fast");
         }
 
         public void Execute()

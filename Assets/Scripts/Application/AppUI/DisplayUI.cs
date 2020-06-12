@@ -5,9 +5,7 @@ namespace App
 {
     public class DisplayUI : MonoBehaviour
     {
-        [SerializeField]
-        private CanvasGroup _group;
-
+        [SerializeField] private CanvasGroup _group;
 
         public void DisplayGroup()
         {

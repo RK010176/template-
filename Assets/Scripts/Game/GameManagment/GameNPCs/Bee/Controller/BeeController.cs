@@ -1,43 +1,28 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Common;
 
 namespace Game
 {
     public class BeeController : MonoBehaviour, INpc
     {
-        private StateMachine _stateMachine;
-        [SerializeField] private Animator _animator;
         public NpcBehaviors NpcBehaviors { get; set; }
-        private float _movingSpeed;
-        private float _fastMovingSpeed;
-        private float _searchRadius;
-        private float _attackRadius;
-        private float _period;
-        private float _patrollingRotation;
-        private List<AudioClip> _sounds;
+        private StateMachine _stateMachine;
+        private Animator _animator;        
         private AudioSource _audioSource;
+        [SerializeField] private FloatVal _health;
         private void Awake()
         {
             _stateMachine = new StateMachine();
             _audioSource = GetComponent<AudioSource>();
+            _animator = GetComponent<Animator>();            
         }
         void Start()
-        {
-            GetLavelData();
-            _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed));
+        {            
+            _stateMachine.SetState(new BeePatrol(transform, _animator, NpcBehaviors.MovingSpeed));
             Play1();
+            _health.Value = NpcBehaviors.Health;
         }
-        public void GetLavelData()
-        {
-            _movingSpeed = NpcBehaviors.MovingSpeed;
-            _fastMovingSpeed = NpcBehaviors.FastMovingSpeed;
-            _searchRadius = NpcBehaviors.SearchRadius;
-            _attackRadius = NpcBehaviors.AttackRadios;
-            _period = NpcBehaviors.PatrollingStandingPeriod;
-            _patrollingRotation = NpcBehaviors.PatrollingRotation;
-            _sounds = NpcBehaviors.Sounds;
-        }
+        public void GetLavelData(){}
 
         private Vector3 _playerPosition;
         private Vector3 _foodPosition;
@@ -47,13 +32,12 @@ namespace Game
         private bool _stroll = false;
         private bool _isPlayer = false;
 
-
         void Update()
         {
             _stateMachine.Execute();
 
             // search for food and player
-            Collider[] hitObjects = Physics.OverlapSphere(transform.position, _searchRadius);
+            Collider[] hitObjects = Physics.OverlapSphere(transform.position, NpcBehaviors.SearchRadius);
             for (int i = 0; i < hitObjects.Length; i++)
             {
                 if (hitObjects[i].CompareTag("Player"))
@@ -66,11 +50,10 @@ namespace Game
 
             if (Time.time > _nextActionTime)
             {
-                _nextActionTime += _period;
+                _nextActionTime += NpcBehaviors.PatrollingStandingPeriod;
                 _stroll = !_stroll;
             }
         }
-
         private void BeeBrain(Vector3 _playerPosition)
         {
             if (_playerPosition == Vector3.zero)// -> no player found
@@ -96,18 +79,18 @@ namespace Game
         private void BeePatrol()
         {
             if (_stateMachine.GetCurrentState() != "Game.BeePatrol")
-            { _stateMachine.SetState(new BeePatrol(transform, _animator, _movingSpeed)); Play1(); }
+            { _stateMachine.SetState(new BeePatrol(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
         }
         private void MoveFast(Vector3 _playerPosition)
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeMoveFast")
-            { _stateMachine.SetState(new BeeMoveFast(transform, _animator, _fastMovingSpeed)); Play2(); };
+            { _stateMachine.SetState(new BeeMoveFast(transform, _animator, NpcBehaviors.FastMovingSpeed)); Play2(); }
             NPCRotateToTarget(_playerPosition);           
         }
         private void Walk(Vector3 FoodrPos)
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeMove")
-            { _stateMachine.SetState(new BeeMove(transform, _animator, _movingSpeed)); Play1(); }
+            { _stateMachine.SetState(new BeeMove(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
             NPCRotateToTarget(FoodrPos);
         }
         private void OnCollisionEnter(Collision collision)
@@ -132,19 +115,19 @@ namespace Game
         #region Sounds
         private void Play1()
         {
-            _audioSource.clip = _sounds[0];
+            _audioSource.clip = NpcBehaviors.Sounds[0];
             _audioSource.loop = true;
             _audioSource.Play();
         }
         private void Play2()
         {
-            _audioSource.clip = _sounds[1];
+            _audioSource.clip = NpcBehaviors.Sounds[1];
             _audioSource.loop = true;
             _audioSource.Play();
         }
         private void Play3()
         {
-            _audioSource.clip = _sounds[2];
+            _audioSource.clip = NpcBehaviors.Sounds[2];
             _audioSource.loop = true;
             _audioSource.Play();
         }

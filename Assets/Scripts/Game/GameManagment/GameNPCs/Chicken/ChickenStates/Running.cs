@@ -17,7 +17,7 @@ namespace Game
 
         public void Enter()
         {
-            Debug.Log("Chicken Running");
+            //Debug.Log("Chicken Running");
         }
 
         public void Execute()

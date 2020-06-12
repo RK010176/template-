@@ -1,45 +1,29 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Common;
 
 namespace Game
 {
+
+    // TODO: abstract Controller
     public class ChickenController : MonoBehaviour,INpc
     {
-        private StateMachine _stateMachine;
-        [SerializeField] private Animator _animator;
         public NpcBehaviors NpcBehaviors { get; set; }
-        private float _movingSpeed;
-        private float _fastMovingSpeed;
-        private float _searchRadius;
-        private float _attackRadius;
-        private float _period;
-        private float _patrollingRotation;
-        private List<AudioClip> _sounds;
+        private StateMachine _stateMachine;
+        private Animator _animator;        
         private AudioSource _audioSource;
+        [SerializeField] private FloatVal _health;
         private void Awake()
         {
             _stateMachine = new StateMachine();
             _audioSource = GetComponent<AudioSource>();
-        }
-        
-        // Chicken Strolling around on start
+            _animator = GetComponent<Animator>();            
+        }                
         private void Start()
-        {
-            GetLavelData();            
-            Patrol();
+        {                    
+            Patrol(); // Chicken Strolling around on start
+            _health.Value = NpcBehaviors.Health;
         }
-
-        public void GetLavelData()
-        {
-            _movingSpeed = NpcBehaviors.MovingSpeed;
-            _fastMovingSpeed = NpcBehaviors.FastMovingSpeed;
-            _searchRadius = NpcBehaviors.SearchRadius;
-            _attackRadius = NpcBehaviors.AttackRadios;
-            _period = NpcBehaviors.PatrollingStandingPeriod;
-            _patrollingRotation = NpcBehaviors.PatrollingRotation;
-            _sounds = NpcBehaviors.Sounds;
-        }
+        public void GetLavelData(){}
         
         private Vector3 _playerPosition;
         private Vector3 _foodPosition;
@@ -57,7 +41,7 @@ namespace Game
             
 
             // search for food and player
-            Collider[] hitObjects = Physics.OverlapSphere(transform.position, _searchRadius);
+            Collider[] hitObjects = Physics.OverlapSphere(transform.position, NpcBehaviors.SearchRadius);
             for (int i = 0; i < hitObjects.Length; i++)
             {
                 if (hitObjects[i].CompareTag("Player"))
@@ -73,11 +57,10 @@ namespace Game
 
             if (Time.time > _nextActionTime)
             {
-                _nextActionTime += _period;
+                _nextActionTime += NpcBehaviors.PatrollingStandingPeriod;
                 _stroll = !_stroll;
             }
         }
-
         private void ChickenBrain(Vector3 _playerPosition, Vector3 FoodrPos)
         {            
             _playerDistance = (transform.position - _playerPosition).magnitude;
@@ -89,7 +72,7 @@ namespace Game
                 else // look for food
                 {
                     _foodDistance = (transform.position - FoodrPos).magnitude;
-                    if (_foodDistance < _searchRadius) // found food location                
+                    if (_foodDistance < NpcBehaviors.SearchRadius) // found food location                
                         Walk(FoodrPos);
                     else // no food to be found -> stroll...                
                         PatrolOrStand();
@@ -104,33 +87,33 @@ namespace Game
 
         #region States functions
         private void Patrol()
-        {_stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed));Play1();}
+        {_stateMachine.SetState(new Patrol(transform, _animator, NpcBehaviors.MovingSpeed));Play1();}
         private void Run(Vector3 _playerPosition)
         {
             if (_state != "Game.Running")
-            {_stateMachine.SetState(new Running(transform, _animator, _fastMovingSpeed));Play2();}
+            {_stateMachine.SetState(new Running(transform, _animator, NpcBehaviors.FastMovingSpeed));Play2();}
             NPCRotateToTarget(_playerPosition);
             _isFood = false;            
         }
         private void PatrolOrStand()
         {
             if (_state != "Game.Patrol" && !_stroll)
-            { _stateMachine.SetState(new Patrol(transform, _animator, _movingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Patrol(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
             if (_state != "Game.Standing" && _stroll)
-            { _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed)); Play1(); }            
+            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }            
         }
         private void Walk(Vector3 FoodrPos)
         {
             if (_state != "Game.Walking")
-            {_stateMachine.SetState(new Walking(transform, _animator, _fastMovingSpeed));Play1();}
+            {_stateMachine.SetState(new Walking(transform, _animator, NpcBehaviors.FastMovingSpeed));Play1();}
             NPCRotateToTarget(FoodrPos);            
         }
         private void EatOrStand()
         {
             if (_state != "Game.Eating" && !_stroll)
-            { _stateMachine.SetState(new Eating(transform, _animator, _movingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Eating(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
             if (_state != "Game.Standing" && _stroll)
-            { _stateMachine.SetState(new Standing(transform, _animator, _movingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -152,13 +135,13 @@ namespace Game
         #region Sounds
         private void Play1()
         {
-            _audioSource.clip = _sounds[0];
+            _audioSource.clip = NpcBehaviors.Sounds[0];
             _audioSource.loop = false;
             _audioSource.Play();
         }
         private void Play2()
         {
-            _audioSource.clip = _sounds[1];
+            _audioSource.clip = NpcBehaviors.Sounds[1];
             _audioSource.loop = true;
             _audioSource.Play();
         }

@@ -21,6 +21,7 @@ MonoBehaviour:
     MovingSpeed: 0
     SpawnPoint: {x: 0, y: 0, z: 0}
     Sounds: []
+    Health: 0
 --- !u!114 &-5678297763508229277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +46,7 @@ MonoBehaviour:
     MovingSpeed: 0
     SpawnPoint: {x: 0, y: 0, z: 0}
     Sounds: []
+    Health: 0
 --- !u!114 &-2761813760502592935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +77,7 @@ MonoBehaviour:
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
     - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
+    Health: 100
   - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
     MovingSpeed: 0.27
     FastMovingSpeed: 0.7
@@ -86,6 +89,7 @@ MonoBehaviour:
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
     - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
+    Health: 100
   - prefab: {fileID: 1046869630431942, guid: c717f817a496cf247a92b830b355a407, type: 3}
     MovingSpeed: 0.25
     FastMovingSpeed: 0.7
@@ -95,9 +99,10 @@ MonoBehaviour:
     AttackRadios: 2
     SpawnPoint: {x: -0.4, y: 0.2, z: 1.24}
     Sounds:
-    - {fileID: 8300000, guid: 13b1c73ff72bd2d499f7f32a9693768b, type: 3}
-    - {fileID: 8300000, guid: d1a4e2c63f3d27641b460333d1bfae9c, type: 3}
-    - {fileID: 8300000, guid: dcb131cebc69dbb49933f086cbe5d09d, type: 3}
+    - {fileID: 8300000, guid: 73ee6855d660c4e4ea8ee872b5a04983, type: 3}
+    - {fileID: 8300000, guid: 03c837c00abe3a94f892ff34f4434c70, type: 3}
+    - {fileID: 8300000, guid: 935032eabdc67d145ad50eb922feead3, type: 3}
+    Health: 100
   Conditions: []
   PlayerSpecs:
     prefab: {fileID: 1767663768970106, guid: ca9fda2f4d77c4d4f88d4ed8b939f69b, type: 3}
@@ -107,6 +112,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: a830f38b0b281f040b0de0cf1214b35b, type: 3}
     - {fileID: 8300000, guid: f8b602cbbbfb6934b8d1b89e271c7cfd, type: 3}
     - {fileID: 8300000, guid: 132de643d725fb24db6ae751ab85292f, type: 3}
+    Health: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

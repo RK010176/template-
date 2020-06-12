@@ -17,14 +17,6 @@ namespace App
         [SerializeField] private Camera _camera;
         [SerializeField] private Light _light;
 
-        private void OnEnable()
-        {
-            ApplicationEvents.OnLoadingFinish += LoadingFinish;
-            ApplicationEvents.OnUnLoadingFinish += UnLoadingFinish;
-            ApplicationEvents.OnDisableCamAndLight += DisableCamAndLight;
-            ApplicationEvents.OnEnableCamAndLight += EnableCamAndLight;
-        }
-
         private void Awake()
         {
             _machine = new StateMachine();
@@ -35,6 +27,13 @@ namespace App
             _burger_State = new UIGameBurger_State();
         }
 
+        private void OnEnable()
+        {
+            ApplicationEvents.OnLoadingFinish += LoadingFinish;
+            ApplicationEvents.OnUnLoadingFinish += UnLoadingFinish;
+            ApplicationEvents.OnDisableCamAndLight += DisableCamAndLight;
+            ApplicationEvents.OnEnableCamAndLight += EnableCamAndLight;
+        }      
         private void Start()
         {
             _machine.SetState(_loading_State);
@@ -59,18 +58,18 @@ namespace App
         }
         private void EnableCamAndLight()
         {
-            _camera.gameObject.SetActive(true);
+            if (_camera != null)
+                _camera.gameObject.SetActive(true);
             if(_light != null)
                 _light.gameObject.SetActive(true);
         }
-
         private void UnLoadingFinish(string scene)
         {
             //Debug.Log(scene);        
         }
 
 
-        // Menu Buttons conneted to Events
+        #region Menu Buttons conneted to Events
         public void Play()
         {
             _machine.SetState(_playing_State);
@@ -87,12 +86,10 @@ namespace App
         {
             _machine.SetState(_inMenu_State);
         }
-
         public void Quit()
         {
-            Debug.Log("Quit");
             _machine.SetState(_Quit_State);
         }
-
+        #endregion
     }
 }

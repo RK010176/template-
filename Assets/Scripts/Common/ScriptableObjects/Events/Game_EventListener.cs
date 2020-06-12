@@ -13,8 +13,7 @@ namespace Common
 
         private void OnEnable()
         {
-            Event.RegisterListener(this);
-            Debug.Log(gameObject.name);
+            Event.RegisterListener(this);            
         }
 
         private void OnDisable()

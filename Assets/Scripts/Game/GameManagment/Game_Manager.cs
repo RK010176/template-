@@ -1,19 +1,17 @@
 ﻿using Game;
 using Common;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace App
 { 
     public class Game_Manager : MonoBehaviour
     {
         private Levels Levels;
-
         private INpcsManager _npcsManager;
         private IElements _environment;
         private PlayerManager _playerManager;
         private Level _currentLevel;
-        private int _currentLevelNumber;
+        private int _currentLevelNumber = 0;
         private StateMachine _stateMachine = new StateMachine();
 
         private void Awake()
@@ -21,21 +19,15 @@ namespace App
             ApplicationEvents.DisableCamAndLight();
             Levels = Resources.Load<Levels>("Levels/GameLevels");
             _npcsManager = GetComponent<INpcsManager>();
-            _npcsManager._level = Levels.levels[0];
+            _npcsManager._level = Levels.levels[_currentLevelNumber];
             _environment = GetComponent<IElements>();
-            _environment._level = Levels.levels[0];
-            
-        }
-
-
-
-        private void Start()
-        {
-            ScenesManager.Instance.SetSceneToActiveScene("Game");
-
+            _environment._level = Levels.levels[_currentLevelNumber];
             _playerManager = GetComponent<PlayerManager>();
-            _playerManager.Level = Levels.levels[0];
-
+            _playerManager.Level = Levels.levels[_currentLevelNumber];
+        }
+        private void Start()
+        {            
+            ScenesManager.Instance.SetSceneToActiveScene("Game"); //  Instantiate gameobjects in this scene
             _npcsManager.AddNpcs();
             _environment.AddElements();
             // TODO : conditions

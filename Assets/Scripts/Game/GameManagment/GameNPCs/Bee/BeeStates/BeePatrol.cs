@@ -19,7 +19,7 @@ namespace Game
 
         public void Enter()
         {
-            Debug.Log("Bee Patrol");
+            //Debug.Log("Bee Patrol");
         }
 
         public void Execute()

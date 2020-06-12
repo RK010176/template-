@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Common;
 using System.Collections.Generic;
@@ -8,43 +7,37 @@ namespace Game
 {
     public class PlayerController : MonoBehaviour, IPlayer
     {
-        [SerializeField] private Animator _animator;
-        public PlayerSpecs PlayerSpecs { get; set; }        
-        private float _movingSpeed;
-        private List<AudioClip> _sounds;
+        public PlayerSpecs PlayerSpecs { get; set; }
+        private Animator _animator;                              
         private AudioSource _audioSource;
-        
-        [SerializeField] private Item _prefabs;
-                                
         private IPlayerInput _playerInput;
         private float _resetTime = 0;
+        [SerializeField] private FloatVal _health;
 
+        [SerializeField] private Item _prefabs;
+                                        
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _animator = GetComponent<Animator>();
             _playerInput = GetComponent<IPlayerInput>();
-            _playerInput.OnFire += Fire;
+            _playerInput.OnFire += Fire;            
         }
 
         private void Start()
         {
-            GetLavelData();
-        }
-        public void GetLavelData()
-        {
-            _movingSpeed = PlayerSpecs.MovingSpeed;                                                        
-            _sounds = PlayerSpecs.Sounds;
+            _health.Value = PlayerSpecs.Health;
         }
 
 
-
+        public void GetLavelData(){}
         private void Update()
         {
             #region Up
             if (_playerInput.Up)
             {
                 _animator.SetBool("Run", true);
-                transform.position += transform.forward * _movingSpeed * Time.deltaTime *1;
+                transform.position += transform.forward * PlayerSpecs.MovingSpeed * Time.deltaTime *1;
                 Play1();
             }
             else
@@ -72,7 +65,8 @@ namespace Game
             if (_playerInput.SpaceBar)
             {
                 _animator.SetBool("Jump", true);
-                transform.position += transform.forward * _movingSpeed / 2 * Time.deltaTime;
+                transform.position += transform.forward * PlayerSpecs.MovingSpeed / 2 * Time.deltaTime;
+                Play3();
             }
             else
                 _animator.SetBool("Jump", false);
@@ -103,7 +97,6 @@ namespace Game
                 Play2();
             }
         }
-
         private IEnumerator FinishAction()
         {
             _oneShot = false;
@@ -114,19 +107,19 @@ namespace Game
         #region Sounds
         private void Play1()
         {
-            _audioSource.clip = _sounds[0];
+            _audioSource.clip = PlayerSpecs.Sounds[0];
             _audioSource.loop = false;
             _audioSource.Play();
         }
         private void Play2()
         {
-            _audioSource.clip = _sounds[1];
+            _audioSource.clip = PlayerSpecs.Sounds[1];
             _audioSource.loop = false;
             _audioSource.Play();
         }
         private void Play3()
         {
-            _audioSource.clip = _sounds[2];
+            _audioSource.clip = PlayerSpecs.Sounds[2];
             _audioSource.loop = false;
             _audioSource.Play();
         }
