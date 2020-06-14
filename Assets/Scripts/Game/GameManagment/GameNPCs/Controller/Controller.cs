@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Common;
 
 namespace Game
@@ -9,16 +10,20 @@ namespace Game
         protected StateMachine _stateMachine;
         protected Animator _animator;
         protected AudioSource _audioSource;
+        protected AudioManager _audioManager;
         [SerializeField] protected FloatVal _health;
 
         private void Awake()
         {
             _stateMachine = new StateMachine();
-            _audioSource = GetComponent<AudioSource>();
+            _audioSource = GetComponent<AudioSource>();            
             _animator = GetComponent<Animator>();
+            _audioManager = new AudioManager();                        
         }
         private void Start()
         {
+            _audioManager.Sounds = NpcBehaviors.Sounds;
+            _audioManager.AudioSource = _audioSource;
             _health.Value = NpcBehaviors.Health;
             Patrol(); //Patrolling around on start
         }

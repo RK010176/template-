@@ -12,7 +12,7 @@ namespace App
         private PlayerManager _playerManager;
         private Level _currentLevel;
         private int _currentLevelNumber = 0;
-        private StateMachine _stateMachine = new StateMachine();
+        //private StateMachine _stateMachine = new StateMachine();
 
         private void Awake()
         {            
@@ -27,7 +27,7 @@ namespace App
         }
         private void Start()
         {            
-            ScenesManager.Instance.SetSceneToActiveScene("Game"); //  Instantiate gameobjects in this scene
+            ScenesManager.Instance.SetSceneToActiveScene("Game"); //  Instantiate Gameobjects in this scene
             _npcsManager.AddNpcs();
             _environment.AddElements();
             // TODO : conditions
@@ -38,5 +38,7 @@ namespace App
         {
             ApplicationEvents.EnableCamAndLight();
         }
+
+
     }
 }

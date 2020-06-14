@@ -12,6 +12,7 @@ namespace Game
         private AudioSource _audioSource;
         private IPlayerInput _playerInput;
         private float _resetTime = 0;
+        private AudioManager _audioManager;
         [SerializeField] private FloatVal _health;
 
         [SerializeField] private Item _prefabs;
@@ -21,11 +22,14 @@ namespace Game
             _audioSource = GetComponent<AudioSource>();
             _animator = GetComponent<Animator>();
             _playerInput = GetComponent<IPlayerInput>();
-            _playerInput.OnFire += Fire;            
+            _playerInput.OnFire += Fire;
+            _audioManager = new AudioManager();
         }
 
         private void Start()
         {
+            _audioManager.Sounds = PlayerSpecs.Sounds;
+            _audioManager.AudioSource = _audioSource;
             _health.Value = PlayerSpecs.Health;
         }
 
@@ -38,7 +42,7 @@ namespace Game
             {
                 _animator.SetBool("Run", true);
                 transform.position += transform.forward * PlayerSpecs.MovingSpeed * Time.deltaTime *1;
-                Play1();
+                _audioManager.PlaySound(0,false);
             }
             else
                 _animator.SetBool("Run", false);
@@ -66,7 +70,8 @@ namespace Game
             {
                 _animator.SetBool("Jump", true);
                 transform.position += transform.forward * PlayerSpecs.MovingSpeed / 2 * Time.deltaTime;
-                Play3();
+                _audioManager.PlaySound(2, false);
+
             }
             else
                 _animator.SetBool("Jump", false);
@@ -94,7 +99,7 @@ namespace Game
             {
                 Instantiate(_prefabs.GameObject, transform.position, transform.rotation);
                 StartCoroutine(FinishAction());
-                Play2();
+                _audioManager.PlaySound(1, false);
             }
         }
         private IEnumerator FinishAction()
@@ -103,26 +108,6 @@ namespace Game
             yield return new WaitForSeconds(1);
             _oneShot = true;
         }
-
-        #region Sounds
-        private void Play1()
-        {
-            _audioSource.clip = PlayerSpecs.Sounds[0];
-            _audioSource.loop = false;
-            _audioSource.Play();
-        }
-        private void Play2()
-        {
-            _audioSource.clip = PlayerSpecs.Sounds[1];
-            _audioSource.loop = false;
-            _audioSource.Play();
-        }
-        private void Play3()
-        {
-            _audioSource.clip = PlayerSpecs.Sounds[2];
-            _audioSource.loop = false;
-            _audioSource.Play();
-        }
-        #endregion
+      
     }
 }

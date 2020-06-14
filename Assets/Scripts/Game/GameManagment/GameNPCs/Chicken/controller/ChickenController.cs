@@ -32,55 +32,51 @@ namespace Game
 
         #region States functions
         protected override void Patrol()
-        { base.Patrol(); Play1();}
+        { base.Patrol();
+            _audioManager.PlaySound(0, false);}
         private void PatrolOrStand()
         {
             if (_state != "Game.Patrol" && !_stroll)
-            { _stateMachine.SetState(new Patrol(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Patrol(transform, _animator, NpcBehaviors.MovingSpeed));
+                _audioManager.PlaySound(0, false);
+            }
             if (_state != "Game.Standing" && _stroll)
-            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed));
+                _audioManager.PlaySound(0, false);
+            }
         }
         private void Walk(Vector3 FoodrPos)
         {
             if (_state != "Game.Walking")
-            { _stateMachine.SetState(new Walking(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Walking(transform, _animator, NpcBehaviors.MovingSpeed));
+                _audioManager.PlaySound(0, false);}
             NPCRotateToTarget(FoodrPos);
         }
         private void Run(Vector3 _playerPosition)
         {
             if (_state != "Game.Running")
-            { _stateMachine.SetState(new Running(transform, _animator, NpcBehaviors.FastMovingSpeed));Play2();}
+            { _stateMachine.SetState(new Running(transform, _animator, NpcBehaviors.FastMovingSpeed));
+                _audioManager.PlaySound(1, true);
+            }
             NPCRotateToTarget(_playerPosition);
             _isFood = false;            
         }               
         private void EatOrStand()
         {
             if (_state != "Game.Eating" && !_stroll)
-            { _stateMachine.SetState(new Eating(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Eating(transform, _animator, NpcBehaviors.MovingSpeed));
+                _audioManager.PlaySound(0, false);
+            }
             if (_state != "Game.Standing" && _stroll)
-            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed));
+                _audioManager.PlaySound(0, false);
+            }
         }
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.transform.tag == "Food")
                 _isFood = true;
         }        
-        #endregion
-
-        //TODO: D Inversion extract it
-        #region Sounds
-        private void Play1()
-        {
-            _audioSource.clip = NpcBehaviors.Sounds[0];
-            _audioSource.loop = false;
-            _audioSource.Play();
-        }
-        private void Play2()
-        {
-            _audioSource.clip = NpcBehaviors.Sounds[1];
-            _audioSource.loop = true;
-            _audioSource.Play();
-        }
         #endregion
     }
 }
