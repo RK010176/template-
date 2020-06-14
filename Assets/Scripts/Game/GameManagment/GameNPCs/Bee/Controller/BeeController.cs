@@ -2,64 +2,14 @@
 using Common;
 
 namespace Game
-{
-    public class BeeController : MonoBehaviour, INpc
+{    
+    public class BeeController : Controller
     {
-        public NpcBehaviors NpcBehaviors { get; set; }
-        private StateMachine _stateMachine;
-        private Animator _animator;        
-        private AudioSource _audioSource;
-        [SerializeField] private FloatVal _health;
-        private void Awake()
-        {
-            _stateMachine = new StateMachine();
-            _audioSource = GetComponent<AudioSource>();
-            _animator = GetComponent<Animator>();            
-        }
-        void Start()
-        {            
-            _stateMachine.SetState(new BeePatrol(transform, _animator, NpcBehaviors.MovingSpeed));
-            Play1();
-            _health.Value = NpcBehaviors.Health;
-        }
-        public void GetLavelData(){}
-
-        private Vector3 _playerPosition;
-        private Vector3 _foodPosition;
-        private float _playerDistance;
-        private float _foodDistance;
-        private float _nextActionTime = 0.0f;
-        private bool _stroll = false;
         private bool _isPlayer = false;
-
-        void Update()
-        {
-            _stateMachine.Execute();
-
-            // search for food and player
-            Collider[] hitObjects = Physics.OverlapSphere(transform.position, NpcBehaviors.SearchRadius);
-            for (int i = 0; i < hitObjects.Length; i++)
-            {
-                if (hitObjects[i].CompareTag("Player"))
-                    _playerPosition = hitObjects[i].gameObject.transform.position;
-            }
-
-            BeeBrain(_playerPosition);
-            _playerPosition = Vector3.zero;
-            Vector3Utility.Clear();
-
-            if (Time.time > _nextActionTime)
-            {
-                _nextActionTime += NpcBehaviors.PatrollingStandingPeriod;
-                _stroll = !_stroll;
-            }
-        }
-        private void BeeBrain(Vector3 _playerPosition)
+        protected override void Brain(Vector3 _playerPosition)
         {
             if (_playerPosition == Vector3.zero)// -> no player found
-            {
-                BeePatrol();
-            }
+            { PatrolrStand();}
             else // -> player found 
             {
                 _playerDistance = (transform.position - _playerPosition).magnitude;
@@ -76,10 +26,14 @@ namespace Game
         }
 
         #region States functions
-        private void BeePatrol()
+        protected override void Patrol()
+        { _stateMachine.SetState( new BeePatrol(transform, _animator,  NpcBehaviors.MovingSpeed)); Play1(); }
+        private void PatrolrStand()
         {
             if (_stateMachine.GetCurrentState() != "Game.BeePatrol")
-            { _stateMachine.SetState(new BeePatrol(transform, _animator, NpcBehaviors.MovingSpeed)); Play1(); }
+            {
+                _stateMachine.SetState(new BeePatrol(transform, _animator, NpcBehaviors.MovingSpeed)); Play1();
+            }
         }
         private void MoveFast(Vector3 _playerPosition)
         {
@@ -102,14 +56,7 @@ namespace Game
         {
             if (_stateMachine.GetCurrentState() != "Game.BeeAttack")
             { _stateMachine.SetState(new BeeAttack(transform, _animator)); Play3(); }
-        }
-        private void NPCRotateToTarget(Vector3 TargetPosition)
-        {
-            var lookPos = transform.position - TargetPosition;
-            lookPos.y = transform.position.y;
-            transform.rotation = Quaternion.LookRotation(-lookPos);
-        }
-
+        }       
         #endregion
 
         #region Sounds

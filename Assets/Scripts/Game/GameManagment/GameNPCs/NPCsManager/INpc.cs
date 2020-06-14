@@ -4,7 +4,6 @@ namespace Game
 {
     public interface INpc
     {
-        NpcBehaviors NpcBehaviors { get; set; }
-        void GetLavelData();
+        NpcBehaviors NpcBehaviors { get; set; }       
     }
 }
