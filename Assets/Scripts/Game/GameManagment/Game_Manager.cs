@@ -14,7 +14,7 @@ namespace App
         private int _currentLevelNumber = 0;
         //private StateMachine _stateMachine = new StateMachine();
 
-        private void Awake()
+        private void Awake() 
         {            
             ApplicationEvents.DisableCamAndLight();
             Levels = Resources.Load<Levels>("Levels/GameLevels");
@@ -25,7 +25,7 @@ namespace App
             _playerManager = GetComponent<PlayerManager>();
             _playerManager.Level = Levels.levels[_currentLevelNumber];
         }
-        private void Start()
+        private void Start() // init npc's, env, player
         {            
             ScenesManager.Instance.SetSceneToActiveScene("Game"); //  Instantiate Gameobjects in this scene
             _npcsManager.AddNpcs();

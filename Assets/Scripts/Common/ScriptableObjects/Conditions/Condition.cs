@@ -14,4 +14,14 @@ public class Condition : ScriptableObject
     public string description;      // A description of the Condition, for example 'BeamsOff'.
     public bool satisfied;          // Whether or not the Condition has been satisfied, for example are the beams off?
     public int hash;                // A number which represents the description.  This is used to compare ConditionCollection Conditions to AllConditions Conditions.
+
+    public bool isMet = false;
+
+    public void CheckCondition()
+    {
+        if (isMet)
+        {
+            
+        }
+    }
 }

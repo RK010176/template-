@@ -13,7 +13,7 @@ namespace Game
         private IPlayerInput _playerInput;
         private float _resetTime = 0;
         private AudioManager _audioManager;
-        [SerializeField] private FloatVal _health;
+        public FloatVal _health;
 
         [SerializeField] private Item _prefabs;
                                         

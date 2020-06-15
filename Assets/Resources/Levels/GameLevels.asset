@@ -81,7 +81,7 @@ MonoBehaviour:
   - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
     MovingSpeed: 0.27
     FastMovingSpeed: 0.7
-    PatrollingRotation: -10
+    PatrollingRotation: 10
     PatrollingStandingPeriod: 5
     SearchRadius: 2
     AttackRadios: 2
@@ -93,7 +93,7 @@ MonoBehaviour:
   - prefab: {fileID: 1046869630431942, guid: c717f817a496cf247a92b830b355a407, type: 3}
     MovingSpeed: 0.25
     FastMovingSpeed: 0.7
-    PatrollingRotation: -10
+    PatrollingRotation: 15
     PatrollingStandingPeriod: 2
     SearchRadius: 2
     AttackRadios: 2

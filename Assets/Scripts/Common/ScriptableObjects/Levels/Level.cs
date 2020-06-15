@@ -46,7 +46,9 @@ namespace Common
     [Serializable]
     public class Conditions
     {
-
+        public int Seconds;
+        public List<Condition> WinConditions;
+        public List<Condition> LoseConditions;
     }
 
     [Serializable]
@@ -56,6 +58,7 @@ namespace Common
         public Vector3 SpawnPoint;
         public List<AudioClip> Sounds;
         public float Health;
+        public float CurrentHealth;
     }
 
 }
