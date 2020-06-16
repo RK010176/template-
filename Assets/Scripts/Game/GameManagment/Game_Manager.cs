@@ -17,7 +17,7 @@ namespace App
         private void Awake() 
         {            
             ApplicationEvents.DisableCamAndLight();
-            Levels = Resources.Load<Levels>("Levels/GameLevels");
+            Levels = Resources.Load<Levels>("GameLevels/GameLevels");
             _npcsManager = GetComponent<INpcsManager>();
             _npcsManager._level = Levels.levels[_currentLevelNumber];
             _environment = GetComponent<IElements>();

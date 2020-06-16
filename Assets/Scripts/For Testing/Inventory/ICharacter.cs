@@ -2,7 +2,7 @@
 
 public interface ICharacter
 {
-    Inventory Inventory { get; }
+    Inventory_test Inventory { get; }
     int Health { get;  }    
     int Level { get;  }
 

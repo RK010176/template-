@@ -11,7 +11,7 @@ namespace Tests
         {
             //ARRANGE
             ICharacter character = Substitute.For<ICharacter>();
-            Inventory inventory = new Inventory(character);
+            Inventory_test inventory = new Inventory_test(character);
             InvItem chestOne = new InvItem() { EquipSlot = EquipSlots.Chest };
             InvItem chestTwo = new InvItem() { EquipSlot = EquipSlots.Chest };
             //ACT
@@ -28,7 +28,7 @@ namespace Tests
         {
             //ARRANGE
             ICharacter character = Substitute.For<ICharacter>();
-            Inventory inventory = new Inventory(character);
+            Inventory_test inventory = new Inventory_test(character);
             InvItem chestOne = new InvItem() { EquipSlot = EquipSlots.Chest };
            
             //ACT

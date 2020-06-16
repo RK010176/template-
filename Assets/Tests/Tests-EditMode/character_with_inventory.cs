@@ -10,7 +10,7 @@ namespace Tests
         {
             //ARRANGE
             ICharacter character = Substitute.For<ICharacter>(); //new ICharacter();
-            Inventory inventory = new Inventory(character);
+            Inventory_test inventory = new Inventory_test(character);
             InvItem pants = new InvItem() {EquipSlot = EquipSlots.Legs,Armor = 40 };
             InvItem shild = new InvItem () { EquipSlot = EquipSlots.RightHand, Armor = 50 };
 

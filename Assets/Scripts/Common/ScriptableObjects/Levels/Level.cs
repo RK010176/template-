@@ -12,7 +12,7 @@ namespace Common
         public int LevelNumber;
         public List<Elements> Elements = new List<Elements>();
         public List<NpcBehaviors> Npcs = new List<NpcBehaviors>();
-        public List<Conditions> Conditions = new List<Conditions>();
+        public List<Interactables> Interactables = new List<Interactables>();
         public PlayerSpecs PlayerSpecs = new PlayerSpecs();
     }
     
@@ -44,7 +44,7 @@ namespace Common
     }
 
     [Serializable]
-    public class Conditions
+    public class Interactables
     {
         public int Seconds;
         public List<Condition> WinConditions;

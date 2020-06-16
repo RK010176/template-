@@ -11,11 +11,12 @@ namespace Game
         {
             for (int i = 0; i < _level.Elements.Count; i++)
             {
-                GameObject _go = Instantiate(_level.Elements[i].prefab, _level.Elements[i].Position, Quaternion.Euler(_level.Elements[i].Rotation));
+                GameObject _go = Instantiate(_level.Elements[i].prefab, 
+                                             _level.Elements[i].Position, 
+                                             Quaternion.Euler(_level.Elements[i].Rotation));
                 _go.GetComponent<IElement>().Elements = _level.Elements[i];
             }
         }
-
 
         public void RemoveElements()
         {
