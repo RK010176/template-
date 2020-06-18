@@ -14,15 +14,14 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "New SaveData", menuName = "core/SaveData")]
 public class SaveData : ResettableScriptableObject
 {
-    // This nested class is a lighter replacement for
-    // Dictionaries.  This is required because Dictionaries
-    // are not serializable.  It has a single generic type
-    // that represents the type of data to be stored in it.
+    // This nested class is a lighter replacement for Dictionaries.
+    // This is required because Dictionaries are not serializable.
+    // It has a single generic type that represents the type of data to be stored in it.
     [Serializable]
     public class KeyValuePairLists<T>
     {
-        public List<string> keys = new List<string>();      // The keys are unique identifiers for each element of data. 
-        public List<T> values = new List<T>();              // The values are the elements of data.
+        public List<string> keys = new List<string>();  // The keys are unique identifiers for each element of data. 
+        public List<T> values = new List<T>();          // The values are the elements of data.
 
         public void Clear ()
         {
@@ -33,7 +32,6 @@ public class SaveData : ResettableScriptableObject
         {
             // Find the index of the keys and values based on the given key.
             int index = keys.FindIndex(x => x == key);
-
             // If the index is positive...
             if (index > -1)
             {
@@ -51,7 +49,6 @@ public class SaveData : ResettableScriptableObject
         {
             // Find the index of the keys and values based on the given key.
             int index = keys.FindIndex(x => x == key);
-
             // If the index is positive...
             if (index > -1)
             {
@@ -59,12 +56,10 @@ public class SaveData : ResettableScriptableObject
                 value = values[index];
                 return true;
             }
-
             // Otherwise, return that the value was not found.
             return false;
         }
     }
-
 
     // These are collections for various different data types.
     public KeyValuePairLists<bool> boolKeyValuePairLists = new KeyValuePairLists<bool> ();
@@ -83,7 +78,7 @@ public class SaveData : ResettableScriptableObject
         quaternionKeyValuePairLists.Clear ();
     }
 
-    #region Svae
+    #region Save
     // This is the generic version of the Save function which takes a
     // collection and value of the same type and then tries to set a value.
     private void Save<T>(KeyValuePairLists<T> lists, string key, T value)

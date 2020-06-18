@@ -7,9 +7,10 @@ namespace App
     public class Game_Manager : MonoBehaviour
     {
         private Levels Levels;
-        private INpcsManager _npcsManager;
-        private IElements _environment;
         private PlayerManager _playerManager;
+        private InteractablesManager _interactablesManager;
+        private IElements _environment;
+        private INpcsManager _npcsManager;
         private Level _currentLevel;
         private int _currentLevelNumber = 0;
         //private StateMachine _stateMachine = new StateMachine();
@@ -18,20 +19,30 @@ namespace App
         {            
             ApplicationEvents.DisableCamAndLight();
             Levels = Resources.Load<Levels>("GameLevels/GameLevels");
-            _npcsManager = GetComponent<INpcsManager>();
-            _npcsManager._level = Levels.levels[_currentLevelNumber];
-            _environment = GetComponent<IElements>();
-            _environment._level = Levels.levels[_currentLevelNumber];
+            
             _playerManager = GetComponent<PlayerManager>();
             _playerManager.Level = Levels.levels[_currentLevelNumber];
+
+            _interactablesManager = GetComponent<InteractablesManager>(); 
+            _interactablesManager.Interactables = Levels.levels[_currentLevelNumber].Interactables;
+
+            _environment = GetComponent<IElements>();
+            _environment.Elements = Levels.levels[_currentLevelNumber].Elements;
+
+            _npcsManager = GetComponent<INpcsManager>();
+            _npcsManager._level = Levels.levels[_currentLevelNumber];                        
         }
         private void Start() // init npc's, env, player
         {            
             ScenesManager.Instance.SetSceneToActiveScene("Game"); //  Instantiate Gameobjects in this scene
-            _npcsManager.AddNpcs();
-            _environment.AddElements();
-            // TODO : conditions
+
             _playerManager.AddPlayer();
+
+            _interactablesManager.AddInteactables();
+
+            _environment.AddElements();
+            
+            _npcsManager.AddNpcs();           
         }
 
         private void OnDisable()

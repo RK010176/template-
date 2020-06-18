@@ -6,24 +6,33 @@ using Common;
 [CustomEditor(typeof(Levels))]
 public class GameLevelsEditor : Editor
 {
-    Levels levels;
-    Color originalGUIColor;
-    Vector2 scrollPos;
+    private Levels levels;
+    private Color originalGUIColor;
+    private Vector2 scrollPos;
 
     private bool FoldLevels = true;
 
 
     public override void OnInspectorGUI()
     {
+        originalGUIColor = GUI.color; // save default color
+
         #region Header
 
         // top Header
-        originalGUIColor = GUI.color;
+        EditorGUILayout.BeginVertical(GUI.skin.button);
+        GUI.color = new Color(1f, 1f, 0.4f);
+        EditorGUILayout.LabelField("Levels", EditorStyles.whiteLargeLabel, GUILayout.MaxHeight(20f));
+        //GUI.color = originalGUIColor;
+        EditorGUILayout.EndVertical();
+
+        
         EditorGUIUtility.labelWidth = 250;
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Game Levels Window", EditorStyles.boldLabel);
-        GUI.color = new Color(.75f, 1f, .75f);
+        //GUI.color = new Color(.75f, 1f, .75f);
+        GUI.color = new Color(1f, 1f, 0f);
 
         // Header's paragraph
         EditorGUILayout.LabelField("This editor will keep update necessary .asset files in your app. Don't change directory of the ''Resources/Levels''.", EditorStyles.helpBox);
@@ -47,7 +56,7 @@ public class GameLevelsEditor : Editor
             // outer box open
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
-            GUI.color = new Color(.75f, 1f, .75f);
+            GUI.color = new Color(1f, 0.8f, 0f);
             GUILayout.Label("Set Levels", EditorStyles.boldLabel);
 
             GUI.color = originalGUIColor;
@@ -71,8 +80,8 @@ public class GameLevelsEditor : Editor
 
         #region footer
         EditorGUILayout.BeginVertical(GUI.skin.button);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUI.color = new Color(.5f, 1f, 1f, 1f);
+        GUI.color = new Color(1f, 0.7f, 0.4f);
+        //GUI.color = new Color(.5f, 1f, 1f, 1f);
 
         // reset button
         if (GUILayout.Button("Reset To Defaults"))
@@ -87,8 +96,8 @@ public class GameLevelsEditor : Editor
             Application.OpenURL(url);
         }
 
-        GUI.color = originalGUIColor;
-        EditorGUILayout.LabelField("Levels", EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(20f));
+        //GUI.color = originalGUIColor;
+        
         #endregion
 
         EditorGUILayout.EndVertical();

@@ -4,8 +4,8 @@ namespace Game
 {
     public interface IElement
     {
-        Elements Elements { get; set; }
-        void GetLavelData();
+        LevelGameElement GameElementSpecs { get; set; }
+        void ProcessSpecs();
 
     }
 }

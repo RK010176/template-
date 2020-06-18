@@ -5,15 +5,16 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BarrelController : MonoBehaviour, IElement
+
+    public class ElementController : MonoBehaviour, IElement
     {
-        public Elements Elements { get; set; }
+        public LevelGameElement GameElementSpecs { get; set; }
 
         void Start()
         {
-            GetLavelData();
+            ProcessSpecs();
         }
-        public void GetLavelData()
+        public void ProcessSpecs()
         {
 
         }

@@ -19,11 +19,11 @@ public class LevelEditor : Editor
         EditorGUIUtility.labelWidth = 250;
         EditorGUILayout.Space();
 
-        GUI.color = new Color(.75f, 1f, .75f);
+        GUI.color = new Color(1f, 1f, 0f);//(.75f, 1f, .75f);
         EditorGUILayout.LabelField("Level Editor Window", EditorStyles.boldLabel);
         GUI.color = originalGUIColor;
         // Header's paragraph
-        EditorGUILayout.LabelField("set level NPC's ,Game Elements ,Player ,Conditions ", EditorStyles.helpBox);
+        EditorGUILayout.LabelField("Set level Player specifications, Interactables ,Game Elements ,NPC's ", EditorStyles.helpBox);
         GUI.color = originalGUIColor;
         EditorGUILayout.Space();        
         #endregion
@@ -47,7 +47,7 @@ public class LevelEditor : Editor
         // outer box
         EditorGUILayout.BeginVertical(GUI.skin.box);
 
-        GUI.color = new Color(.75f, 1f, .75f);
+        GUI.color = new Color(1f, 1f, 0f);//(.75f, 1f, .75f);
         GUILayout.Label("Settings", EditorStyles.boldLabel);
 
         GUI.color = originalGUIColor;
@@ -83,47 +83,55 @@ public class LevelEditor : Editor
 
         
         EditorGUILayout.BeginVertical(GUI.skin.button);  // -> start vertical 
-        
-        #region NPCs
-        EditorGUILayout.BeginVertical(GUI.skin.box);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUILayout.Label("Set Non Playable Characters", EditorStyles.boldLabel);
-        GUI.color = originalGUIColor;
-        SerializedProperty serializedPropertyList = serializedObject.FindProperty("Npcs");
-        Draw(serializedPropertyList);
-        EditorGUILayout.EndVertical();
-        #endregion
 
-        #region Elements
+        #region PlayerSpecs
         EditorGUILayout.BeginVertical(GUI.skin.box);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUILayout.Label("Set Elements", EditorStyles.boldLabel);
+        GUI.color = new Color(1f, 0.7f, 0.4f); //(.75f, 1f, .75f);
+        GUILayout.Label("Set Level Player specifications", EditorStyles.boldLabel);
         GUI.color = originalGUIColor;
-        serializedPropertyList = serializedObject.FindProperty("Elements");
+        SerializedProperty serializedPropertyList = serializedObject.FindProperty("PlayerSpecs");
         Draw(serializedPropertyList);
         EditorGUILayout.EndVertical();
         #endregion
 
         #region Interactables
         EditorGUILayout.BeginVertical(GUI.skin.box);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUILayout.Label("Set Interactables", EditorStyles.boldLabel);
+        GUI.color = new Color(1f, 0.7f, 0.4f); //(.75f, 1f, .75f);
+        GUILayout.Label("Set Level Interactables", EditorStyles.boldLabel);
         GUI.color = originalGUIColor;
         serializedPropertyList = serializedObject.FindProperty("Interactables");
+        //EditorGUILayout.PropertyField(serializedObject.FindProperty("Action"), new GUIContent("Action"));
         Draw(serializedPropertyList);
         EditorGUILayout.EndVertical();
         #endregion
 
-        #region PlayerSpecs
+        #region Elements
         EditorGUILayout.BeginVertical(GUI.skin.box);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUILayout.Label("Set Player specifications", EditorStyles.boldLabel);
+        GUI.color = new Color(1f, 0.7f, 0.4f); //(.75f, 1f, .75f);
+        GUILayout.Label("Set Level Game Elements", EditorStyles.boldLabel);
         GUI.color = originalGUIColor;
-        serializedPropertyList = serializedObject.FindProperty("PlayerSpecs");
+        serializedPropertyList = serializedObject.FindProperty("Elements");
+
         Draw(serializedPropertyList);
         EditorGUILayout.EndVertical();
         #endregion
+
+        #region NPCs
+        EditorGUILayout.BeginVertical(GUI.skin.box);
+        GUI.color = new Color(1f, 0.7f, 0.4f); //(.75f, 1f, .75f);
+        GUILayout.Label("Set Level Non Playable Characters", EditorStyles.boldLabel);
+        GUI.color = originalGUIColor;
+         serializedPropertyList = serializedObject.FindProperty("Npcs");
+        Draw(serializedPropertyList);
+        EditorGUILayout.EndVertical();
+        #endregion
+
         
+
+       
+
+
+
         EditorGUILayout.EndVertical();                   // -> end vertical 
 
         EditorGUILayout.Space();
@@ -137,8 +145,8 @@ public class LevelEditor : Editor
         #region footer
 
         EditorGUILayout.BeginVertical(GUI.skin.button);
-        GUI.color = new Color(.75f, 1f, .75f);
-        GUI.color = new Color(.5f, 1f, 1f, 1f);
+        GUI.color = new Color(1f, 0.7f, 0.4f); //(.75f, 1f, .75f);
+        //GUI.color = new Color(.5f, 1f, 1f, 1f);
 
         // reset button
         if (GUILayout.Button("Test Level"))

@@ -1,10 +1,11 @@
 ﻿using Common;
+using System.Collections.Generic;
 
 namespace Game
 {
     public interface IElements
     {
-        Level _level { get; set; }
+        List<LevelGameElement> Elements { get; set; }
         void AddElements();
         void RemoveElements();
     }
