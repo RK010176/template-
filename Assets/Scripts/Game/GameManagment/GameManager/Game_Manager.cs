@@ -6,10 +6,10 @@ namespace App
 { 
     public class Game_Manager : MonoBehaviour
     {
-        private Levels Levels;
+        private Levels _levels;
         private PlayerManager _playerManager;
         private InteractablesManager _interactablesManager;
-        private IElements _environment;
+        private IElements _elementsManager;
         private INpcsManager _npcsManager;
         private Level _currentLevel;
         private int _currentLevelNumber = 0;
@@ -18,19 +18,19 @@ namespace App
         private void Awake() 
         {            
             ApplicationEvents.DisableCamAndLight();
-            Levels = Resources.Load<Levels>("GameLevels/GameLevels");
+            _levels = Resources.Load<Levels>("GameLevels/GameLevels");
             
             _playerManager = GetComponent<PlayerManager>();
-            _playerManager.Level = Levels.levels[_currentLevelNumber];
+            _playerManager.Level = _levels.levels[_currentLevelNumber];
 
             _interactablesManager = GetComponent<InteractablesManager>(); 
-            _interactablesManager.Interactables = Levels.levels[_currentLevelNumber].Interactables;
+            _interactablesManager.Interactables = _levels.levels[_currentLevelNumber].Interactables;
 
-            _environment = GetComponent<IElements>();
-            _environment.Elements = Levels.levels[_currentLevelNumber].Elements;
+            _elementsManager = GetComponent<IElements>();
+            _elementsManager.Elements = _levels.levels[_currentLevelNumber].Elements;
 
             _npcsManager = GetComponent<INpcsManager>();
-            _npcsManager._level = Levels.levels[_currentLevelNumber];                        
+            _npcsManager._level = _levels.levels[_currentLevelNumber];                        
         }
         private void Start() // init npc's, env, player
         {            
@@ -40,7 +40,7 @@ namespace App
 
             _interactablesManager.AddInteactables();
 
-            _environment.AddElements();
+            _elementsManager.AddElements();
             
             _npcsManager.AddNpcs();           
         }
