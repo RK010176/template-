@@ -7,8 +7,7 @@ namespace Game
         private string _itemTag;
         private void Start()
         {
-            _itemTag = gameObject.transform.GetChild(0).tag;
-            print(_itemTag);
+            _itemTag = gameObject.transform.GetChild(0).tag;            
         }
         private void OnTriggerEnter(Collider other)
         {
