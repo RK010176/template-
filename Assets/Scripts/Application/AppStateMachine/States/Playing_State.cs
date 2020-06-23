@@ -27,8 +27,8 @@ namespace App
 
         public void Exit()
         {
-            _scenesManager.UnLoadScene(_sceneName);
-            _scenesManager.UnLoadScene(_uIsceneName);
+            //_scenesManager.UnLoadScene(_sceneName);
+            //_scenesManager.UnLoadScene(_uIsceneName);
         }
 
         

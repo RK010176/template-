@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Common;
 
 namespace App
@@ -18,7 +16,9 @@ namespace App
             if (_scenesManager == null)
                 _scenesManager = ScenesManager.Instance;
             _scenesManager.LoadScene(_uIsceneName);
-           // _scenesManager.UnLoadScene(_uIGame);
+
+            _scenesManager.UnLoadScene("Game");
+            _scenesManager.UnLoadScene("UIGame");
         }
 
 

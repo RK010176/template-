@@ -14,6 +14,7 @@ namespace App
         private Quit_State _quit_State;
         private UIGameBurger_State _burger_State;
         private UILevelEnd_State _levelEnd_State;
+        private UILevels_State _levels_State;
         private ScreenFader _screenFader;
 
         [SerializeField] private Camera _camera;
@@ -30,6 +31,7 @@ namespace App
             _quit_State = new Quit_State();
             _burger_State = new UIGameBurger_State();
             _levelEnd_State = new UILevelEnd_State();
+            _levels_State = new UILevels_State();
             _screenFader = FindObjectOfType<ScreenFader>();
         }
         private void OnEnable()
@@ -81,6 +83,12 @@ namespace App
         {
             _stateMachine.SetState(_playing_State);
         }
+
+        public void Levels()
+        {
+            _stateMachine.SetState(_levels_State);
+        }
+        
         public void ShowBurgerMenu()
         {
             _stateMachine.SetState(_burger_State);

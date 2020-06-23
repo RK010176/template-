@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UIMenu.unity
     guid: 99c956ed40abcc541ad73fdc4737b591
+  - enabled: 1
+    path: Assets/Scenes/UILevelEnd.unity
+    guid: 6f02cb33864b6314cb52b780f856f59d
+  - enabled: 1
+    path: Assets/Scenes/UILevels.unity
+    guid: 6990821bd2c113142a07e2ecbd85efe1
   m_configObjects: {}
