@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Common;
+using System;
 
 namespace Game
 {
@@ -9,8 +10,14 @@ namespace Game
         
         public void AddPlayer()
         {
-            GameObject _go = Instantiate(Level.PlayerSpecs.prefab, Level.PlayerSpecs.SpawnPoint, Quaternion.identity);
-            _go.GetComponent<PlayerController>().PlayerSpecs = Level.PlayerSpecs;
+            try {
+                GameObject _go = Instantiate(Level.PlayerSpecs.prefab, Level.PlayerSpecs.SpawnPoint, Quaternion.identity);
+                _go.GetComponent<PlayerController>().PlayerSpecs = Level.PlayerSpecs;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex +" - verify player Level setting!  ");
+            }
         }
     }
 }

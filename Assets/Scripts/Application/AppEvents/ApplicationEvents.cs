@@ -47,6 +47,13 @@ namespace App
         }
 
 
+        public delegate void levelEnded(bool Win);
+        public static event levelEnded OnLevelEnded;
+        static public void LevelEnded(bool Win)
+        {
+            if (OnLevelEnded != null)
+                OnLevelEnded(Win);
+        }
 
     }
 }

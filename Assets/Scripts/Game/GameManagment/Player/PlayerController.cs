@@ -49,8 +49,8 @@ namespace Game
             #endregion
 
             #region Down
-            if (_playerInput.Down)
-                _animator.SetBool("Eat", true);
+            if (_playerInput.Down)            
+                _animator.SetBool("Eat", true);            
             else
                 _animator.SetBool("Eat", false);
             #endregion

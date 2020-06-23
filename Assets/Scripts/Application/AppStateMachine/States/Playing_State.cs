@@ -17,7 +17,7 @@ namespace App
             if (_scenesManager == null)
                 _scenesManager = ScenesManager.Instance;
             _scenesManager.LoadScene(_sceneName);
-            _scenesManager.LoadScene(_uIsceneName);
+            _scenesManager.LoadScene(_uIsceneName);            
         }
 
         public void Execute()
@@ -27,9 +27,10 @@ namespace App
 
         public void Exit()
         {
-
+            _scenesManager.UnLoadScene(_sceneName);
+            _scenesManager.UnLoadScene(_uIsceneName);
         }
 
-
+        
     }
 }

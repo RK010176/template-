@@ -23,6 +23,7 @@ namespace Game
                                         InteractableItem.Position,
                                         Quaternion.Euler(InteractableItem.Rotation));
             
+            //TODO: move to class
             switch (InteractableItem.Action)
             {
                 case Actions.InventoryItem:
@@ -35,6 +36,11 @@ namespace Game
 
             // add  Game Element to Inteactable
             Instantiate(InteractableItem.Element.prefab, InteractableGameObject.transform);
+        }
+
+        public void RemoveInteractables()
+        { 
+            
         }
     }
 

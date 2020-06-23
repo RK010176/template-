@@ -37,18 +37,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelNumber: 0
   PlayerSpecs:
-    prefab: {fileID: 0}
-    MovingSpeed: 0
-    SpawnPoint: {x: 0, y: 0, z: 0}
-    Sounds: []
-    Health: 0
+    prefab: {fileID: 1767663768970106, guid: ca9fda2f4d77c4d4f88d4ed8b939f69b, type: 3}
+    MovingSpeed: 1.2
+    SpawnPoint: {x: 1, y: 0, z: -1}
+    Sounds:
+    - {fileID: 8300000, guid: a830f38b0b281f040b0de0cf1214b35b, type: 3}
+    - {fileID: 8300000, guid: f8b602cbbbfb6934b8d1b89e271c7cfd, type: 3}
+    - {fileID: 8300000, guid: 132de643d725fb24db6ae751ab85292f, type: 3}
+    Health: 100
     CurrentHealth: 0
-  Interactables: []
-  Elements:
-  - prefab: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
+  Interactables:
+  - Action: 1
+    InteractableShape: {fileID: 1295241818653613564, guid: 528b3473416fbf144955206a157df124,
+      type: 3}
+    Position: {x: 2, y: 0, z: -2}
     Rotation: {x: 0, y: 0, z: 0}
-  Npcs: []
+    Scale: {x: 0, y: 0, z: 0}
+    Element:
+      prefab: {fileID: 6129953561170106450, guid: f2cb662f696074b46bc0321271c76463,
+        type: 3}
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+  Elements:
+  - prefab: {fileID: 1776079692457040, guid: 53c15703dacf1c948b5b3211c0c9a311, type: 3}
+    Position: {x: 2, y: 0, z: 3}
+    Rotation: {x: 0, y: 0, z: 0}
+  Npcs:
+  - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+    MovingSpeed: 0.3
+    FastMovingSpeed: 0.7
+    PatrollingRotation: -15
+    PatrollingStandingPeriod: 4
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: 0.1, y: 0, z: 3}
+    Sounds:
+    - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
+    - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
+    Health: 100
+  - prefab: {fileID: 1311290861401530, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+    MovingSpeed: 0.3
+    FastMovingSpeed: 0.7
+    PatrollingRotation: -15
+    PatrollingStandingPeriod: 4
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: 0.5, y: 0, z: 2}
+    Sounds:
+    - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
+    - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
+    Health: 0
+  - prefab: {fileID: 1046869630431942, guid: c717f817a496cf247a92b830b355a407, type: 3}
+    MovingSpeed: 0.3
+    FastMovingSpeed: 0.8
+    PatrollingRotation: -15
+    PatrollingStandingPeriod: 2
+    SearchRadius: 2
+    AttackRadios: 2
+    SpawnPoint: {x: 0.4, y: 0.2, z: 1}
+    Sounds:
+    - {fileID: 8300000, guid: 73ee6855d660c4e4ea8ee872b5a04983, type: 3}
+    - {fileID: 8300000, guid: 03c837c00abe3a94f892ff34f4434c70, type: 3}
+    - {fileID: 8300000, guid: 935032eabdc67d145ad50eb922feead3, type: 3}
+    Health: 100
 --- !u!114 &-2761813760502592935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +127,7 @@ MonoBehaviour:
   - Action: 1
     InteractableShape: {fileID: 1295241818653613564, guid: 528b3473416fbf144955206a157df124,
       type: 3}
-    Position: {x: -1, y: 0, z: -1}
+    Position: {x: 1.8, y: 0, z: -2.5}
     Rotation: {x: 0, y: 0, z: 0}
     Scale: {x: 0, y: 0, z: 0}
     Element:
@@ -108,7 +159,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 5
     SearchRadius: 2
     AttackRadios: 2
-    SpawnPoint: {x: 0.15, y: 0, z: 0.9}
+    SpawnPoint: {x: -2.76, y: 0, z: 2}
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
     - {fileID: 8300000, guid: 706741ece5b299d4dbd92550ed34bcb4, type: 3}
