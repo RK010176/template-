@@ -97,8 +97,8 @@ namespace Game
         {
             if (_oneShot)
             {
-                Instantiate(_prefabs.GameObject, transform.position, transform.rotation);
-                StartCoroutine(FinishAction());
+                //Instantiate(_prefabs.GameObject, transform.position, transform.rotation);
+                //StartCoroutine(FinishAction());
                 _audioManager.PlaySound(1, false);
             }
         }

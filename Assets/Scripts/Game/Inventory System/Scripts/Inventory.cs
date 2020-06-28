@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     public Item[] items = new Item[numItemSlots];    
     public const int numItemSlots = 4;
     public bool _inRoom = false;
+
+    
     public void AddItem(Item itemToAdd)
     {
         for (int i = 0; i < items.Length; i++)
@@ -16,7 +18,10 @@ public class Inventory : MonoBehaviour
             {
                 items[i] = itemToAdd;
                 GameObjects[i] = itemToAdd.GameObject;
-                itemImages[i].sprite = itemToAdd.sprite;
+                try
+                {itemImages[i].sprite = itemToAdd.sprite;}
+                catch (System.Exception)
+                {print("#drag item image to inventory slot in inspector#");}                 
                 itemImages[i].enabled = true;
                 return;
             }
@@ -37,17 +42,17 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
-
     private void PrefabHandler(GameObject Prefab)
     {
         if (_inRoom)
             Debug.Log("Item delivered !!");
         else
         {
-            if (Prefab != null) Instantiate(Prefab);                        
-        }
-        
+            if (Prefab != null) 
+                Instantiate(Prefab,
+                            transform.root.transform.position,
+                            transform.root.transform.rotation);                        
+        }        
     }
 
 }

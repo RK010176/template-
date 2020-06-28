@@ -6,10 +6,11 @@ using Common;
 
 public class ItemsHandler : MonoBehaviour
 {    
-    public Inventory Inventory;
+    private Inventory _inventory;
     public void PickItem(Item item)
     {
-        Inventory.AddItem(item);
+        _inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        _inventory.AddItem(item);
     }
 
     public void DropItem()

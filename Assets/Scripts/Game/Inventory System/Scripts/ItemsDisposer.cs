@@ -9,7 +9,7 @@ public class ItemsDisposer : MonoBehaviour
 
     public void Drop()
     {
-        Debug.Log("drop");
+        //Debug.Log("drop");
         inventory = FindObjectOfType<Inventory>();
         inventory.RemoveItem(inventory.items[ID]);
     }

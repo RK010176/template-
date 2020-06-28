@@ -83,12 +83,10 @@ namespace App
         {
             _stateMachine.SetState(_playing_State);
         }
-
         public void Levels()
         {
             _stateMachine.SetState(_levels_State);
-        }
-        
+        }        
         public void ShowBurgerMenu()
         {
             _stateMachine.SetState(_burger_State);

@@ -1,31 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using Common;
+using UnityEngine;
 
 namespace Game
 {
     public class InventoryItem : MonoBehaviour
-    {
-        private string _itemTag;
+    {        
+        [SerializeField] private Item _item;
+        [SerializeField] private ItemsHandler _handler;
+
         private void Start()
         {
-            _itemTag = gameObject.transform.GetChild(0).tag;
+            string InteracableOS = "Interacables/" + gameObject.transform.GetChild(0).name.Replace("(Clone)", "");            
+             _item =  Resources.Load(InteracableOS) as Item;
+            _handler = GameObject.Find("InventoryMamager").GetComponent<ItemsHandler>();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == _itemTag)
+            // if player
+            if (other.tag == "Player")
             {
-                // TODO: add to inventory
-                // 
-                Destroy(this);
+                //Debug.Log(name);                
+                _handler.PickItem(_item);
+                Destroy(gameObject);
             }
+           
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.tag == _itemTag)
-            {
-
-            }
+            
         }
     }
 
