@@ -17,7 +17,7 @@ namespace Game
                 else // look for food
                 {
                     _foodDistance = (transform.position - FoodPos).magnitude;
-                    if (_foodDistance < NpcBehaviors.SearchRadius) // found food location                
+                    if (_foodDistance < NpcBehaviors.SearchRadius && FoodPos != Vector3.zero) // found food location                
                         Walk(FoodPos);
                     else // no food to be found -> stroll...                
                         PatrolOrStand();

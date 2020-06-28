@@ -146,6 +146,17 @@ MonoBehaviour:
         type: 3}
       Position: {x: 0, y: 0, z: 0}
       Rotation: {x: 0, y: 0, z: 0}
+  - Action: 0
+    InteractableShape: {fileID: 1295241818653613564, guid: 528b3473416fbf144955206a157df124,
+      type: 3}
+    Position: {x: 1, y: 0, z: -2}
+    Rotation: {x: 0, y: 0, z: 0}
+    Scale: {x: 0, y: 0, z: 0}
+    Element:
+      prefab: {fileID: 6822603385026835215, guid: 2f487b026a6cf73429622737b785f42c,
+        type: 3}
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
   Elements:
   - prefab: {fileID: 1776079692457040, guid: 53c15703dacf1c948b5b3211c0c9a311, type: 3}
     Position: {x: -2.31, y: 0, z: -2.73}
