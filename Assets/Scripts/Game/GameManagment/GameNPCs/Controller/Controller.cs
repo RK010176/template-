@@ -69,6 +69,8 @@ namespace Game
         }
         protected virtual void Brain(Vector3 _playerPosition) { }
         protected virtual void Brain(Vector3 _playerPosition, Vector3 FoodPo) { }
+        protected virtual void DogBrain(Vector3 FoodPo) { }
+
         protected virtual void NPCRotateToTarget(Vector3 TargetPosition)
         {
             var lookPos = transform.position - TargetPosition;

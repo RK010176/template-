@@ -13,7 +13,7 @@ namespace Game
 
 
 #if UNITY_EDITOR
-
+            MobileInputs = GameObject.Find("MobileInput");
             MobileInputs.SetActive(true);
             gameObject.AddComponent<EditorInput>();
 #elif UNITY_STANDALONE_WIN

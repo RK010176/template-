@@ -28,13 +28,13 @@ namespace Game
             _transform.position += _transform.forward * _speed * Time.deltaTime;
             _transform.Rotate(Vector3.up, 10 * Time.deltaTime, Space.Self);
             // playing walking animation        
-            _animator.SetBool("Move", true);
+            _animator.SetBool("Idle", true);
 
         }
 
         public void Exit()
         {
-            _animator.SetBool("Move", false);
+            _animator.SetBool("Idle", false);
         }
     }
 

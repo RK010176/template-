@@ -70,6 +70,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 4
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0
     SpawnPoint: {x: 0.1, y: 0, z: 3}
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
@@ -82,6 +83,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 4
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0
     SpawnPoint: {x: 0.5, y: 0, z: 2}
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
@@ -94,6 +96,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 2
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0
     SpawnPoint: {x: 0.4, y: 0.2, z: 1}
     Sounds:
     - {fileID: 8300000, guid: 73ee6855d660c4e4ea8ee872b5a04983, type: 3}
@@ -169,6 +172,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 4
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0.5
     SpawnPoint: {x: 0.15, y: 0, z: 2.85}
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
@@ -181,6 +185,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 5
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0.5
     SpawnPoint: {x: -2.76, y: 0, z: 2}
     Sounds:
     - {fileID: 8300000, guid: 20fc1883870c43542b90f1f26eec2548, type: 3}
@@ -193,6 +198,7 @@ MonoBehaviour:
     PatrollingStandingPeriod: 2
     SearchRadius: 2
     AttackRadios: 2
+    StopAttackRadios: 0.2
     SpawnPoint: {x: -0.4, y: 0.2, z: 1.24}
     Sounds:
     - {fileID: 8300000, guid: 73ee6855d660c4e4ea8ee872b5a04983, type: 3}

@@ -7,8 +7,9 @@ public class Inventory : MonoBehaviour
     public Image[] itemImages = new Image[numItemSlots];
     public Item[] items = new Item[numItemSlots];    
     public const int numItemSlots = 4;
-    public bool _inRoom = false;
+    public bool _inRoom = false;    
 
+    private GameObject Player;
     
     public void AddItem(Item itemToAdd)
     {
@@ -27,6 +28,8 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    // remove item from Item Ui list and position it in scene
     public void RemoveItem(Item itemToRemove)
     {
         for (int i = 0; i < items.Length; i++)
@@ -34,7 +37,7 @@ public class Inventory : MonoBehaviour
             if (items[i] == itemToRemove)
             {
                 items[i] = null;
-                PrefabHandler(GameObjects[i]);                
+                ActivateInteractable(GameObjects[i]);                
                 GameObjects[i] = null;
                 itemImages[i].sprite = null;
                 itemImages[i].enabled = false;
@@ -42,16 +45,34 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    private void PrefabHandler(GameObject Prefab)
+    private void ActivateInteractable(GameObject Prefab)
     {
         if (_inRoom)
             Debug.Log("Item delivered !!");
         else
         {
-            if (Prefab != null) 
-                Instantiate(Prefab,
-                            transform.root.transform.position,
-                            transform.root.transform.rotation);                        
+            if (Prefab != null)
+            {
+                Player = GameObject.Find("Player");
+
+                // find inactive Interactable
+                Transform[] trans = GameObject.Find("Interactables").GetComponentsInChildren<Transform>(true);
+                foreach (Transform tr in trans)
+                {
+                    if (!tr.gameObject.activeInHierarchy)
+                    {
+                        if (tr.gameObject.name == Prefab.name + "(Clone)")
+                        {
+                            var inter = tr.transform.parent.gameObject;
+                            // set interactable position in front of player                        
+                            inter.transform.position = Player.transform.position + Player.transform.forward;// +new Vector3(1,0,1);                                                
+                            inter.SetActive(true);
+                            break;
+                        }
+                    }
+                                        
+                }                
+            }
         }        
     }
 

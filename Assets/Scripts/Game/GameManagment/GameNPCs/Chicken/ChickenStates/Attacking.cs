@@ -7,8 +7,8 @@ namespace Game
     {
         private Animator _animator;
         private Transform _transform;
-        private FloatVal _speed;
-        public Attacking(Transform transform, Animator animator, FloatVal speed)
+        private float _speed;
+        public Attacking(Transform transform, Animator animator, float speed)
         {
             _transform = transform;
             _animator = animator;
@@ -22,7 +22,7 @@ namespace Game
 
         public void Execute()
         {
-            _transform.position += _transform.forward * _speed.Value * Time.deltaTime;
+            _transform.position += _transform.forward * _speed * Time.deltaTime;
 
             _animator.SetBool("Eat", true);
         }

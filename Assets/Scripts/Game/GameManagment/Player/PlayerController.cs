@@ -2,9 +2,15 @@
 using UnityEngine;
 using Common;
 using System.Collections.Generic;
+using System;
 
 namespace Game
 {
+
+    //TODO: refactor Player to support any charecter
+    //      by seperating controlles to charecter
+    //      Ex: move to charecter -> _animator.SetBool("Run", true); 
+
     public class PlayerController : MonoBehaviour, IPlayer
     {
         public PlayerSpecs PlayerSpecs { get; set; }
@@ -13,12 +19,13 @@ namespace Game
         private IPlayerInput _playerInput;
         private float _resetTime = 0;
         private AudioManager _audioManager;
-        public FloatVal _health;
-
+        public FloatVal Health;
+        public event Action<float> OnHealthPctChanged = delegate { };        
         [SerializeField] private Item _prefabs;
                                         
         private void Awake()
         {
+            gameObject.name = "Player";
             _audioSource = GetComponent<AudioSource>();
             _animator = GetComponent<Animator>();
             _playerInput = GetComponent<IPlayerInput>();
@@ -30,7 +37,7 @@ namespace Game
         {
             _audioManager.Sounds = PlayerSpecs.Sounds;
             _audioManager.AudioSource = _audioSource;
-            _health.Value = PlayerSpecs.Health;
+            Health.Value = PlayerSpecs.Health;
         }
 
 
@@ -108,6 +115,22 @@ namespace Game
             yield return new WaitForSeconds(1);
             _oneShot = true;
         }
-      
+
+
+        private void OnCollisionEnter(Collision collision)
+        {            
+            if (collision.gameObject.layer == 8) // Layer Enemy
+            {
+                Debug.Log(collision.collider.name);
+                float currenthealthPct = Health.Value / 100f;
+                OnHealthPctChanged(currenthealthPct);
+                if (Health.Value <= 0)
+                {
+                    //TODO: Player Dead -> Raise UI panel
+                    Debug.Log(Health.Value);
+                }
+            }
+        }
+
     }
 }

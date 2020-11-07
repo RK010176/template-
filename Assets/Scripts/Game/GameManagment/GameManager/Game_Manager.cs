@@ -24,15 +24,16 @@ namespace App
             //_currentLevelNumber = _levels.CurrentLevel;
 
 
+            // Player
             _playerManager = GetComponent<PlayerManager>();
             _playerManager.Level = _levels.levels[_currentLevelNumber.Value];
-
+            // Level Player Interactables
             _interactablesManager = GetComponent<InteractablesManager>(); 
             _interactablesManager.Interactables = _levels.levels[_currentLevelNumber.Value].Interactables;
-
+            // Level Elements 
             _elementsManager = GetComponent<IElements>();
             _elementsManager.Elements = _levels.levels[_currentLevelNumber.Value].Elements;
-
+            // Level NPC's
             _npcsManager = GetComponent<INpcsManager>();
             _npcsManager._level = _levels.levels[_currentLevelNumber.Value];                        
         }

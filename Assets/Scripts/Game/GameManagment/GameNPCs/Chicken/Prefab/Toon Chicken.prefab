@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 564061545311357652}
   - component: {fileID: 7654461036940249790}
   - component: {fileID: 8189544800338052431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toon Chicken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -60,6 +60,7 @@ namespace Common
         public float PatrollingStandingPeriod;
         public float SearchRadius;
         public float AttackRadios;
+        public float StopAttackRadios;
         public Vector3 SpawnPoint;
         public List<AudioClip> Sounds;
         public float Health;

@@ -3,6 +3,8 @@ using Common;
 
 namespace Game
 {
+
+    // addes & remove NPC's from scane
     public class NpcsManager : MonoBehaviour, INpcsManager
     {        
         public Level _level { get; set; }

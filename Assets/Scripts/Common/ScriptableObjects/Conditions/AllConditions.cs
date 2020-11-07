@@ -6,14 +6,9 @@ using UnityEngine;
 public class AllConditions : ResettableScriptableObject
 {
     public Condition[] conditions;                      // All the Conditions that exist in the game.
-
-
     private static AllConditions instance;              // The singleton instance.
-
-
     private const string loadPath = "AllConditions";    // The path within the Resources folder that 
     
-
     public static AllConditions Instance                // The public accessor for the singleton instance.
     {
         get
@@ -32,7 +27,6 @@ public class AllConditions : ResettableScriptableObject
         set { instance = value; }
     }
 
-
     // This function will be called at Start once per run of the game.
     public override void Reset ()
     {
@@ -46,7 +40,6 @@ public class AllConditions : ResettableScriptableObject
             conditions[i].satisfied = false;
         }
     }
-
 
     // This is called from ConditionCollections when they are being checked by an Interactable that has been clicked on.
     public static bool CheckCondition (Condition requiredCondition)

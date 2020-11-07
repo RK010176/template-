@@ -32,7 +32,6 @@ namespace Common
                 this.CurrentState.Exit();
         }
 
-
         public void SetPreviosState()
         {
             if (this.PreviousState != null)
@@ -43,11 +42,11 @@ namespace Common
             }
         }
 
-
         public string GetCurrentState()
         {            
             return CurrentState.ToString();
         }
+
         public void CloseGame()
         {
             Application.Quit();

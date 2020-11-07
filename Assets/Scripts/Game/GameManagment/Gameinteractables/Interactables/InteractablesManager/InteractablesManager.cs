@@ -34,10 +34,10 @@ namespace Game
                     break;
             }
 
-            // add  Game Element to Inteactable
+            // add Game Element to Inteactable
             Instantiate(InteractableItem.Element.prefab, InteractableGameObject.transform);
         }
-
+        
         public void RemoveInteractables()
         { 
             

@@ -7,10 +7,13 @@ public class ItemsDisposer : MonoBehaviour
     public int ID;    
     private Inventory inventory;    // Reference to the Inventory component.   
 
-    public void Drop()
+    private void Start()
     {
-        //Debug.Log("drop");
         inventory = FindObjectOfType<Inventory>();
+    }
+
+    public void Drop()
+    {           
         inventory.RemoveItem(inventory.items[ID]);
     }
 }

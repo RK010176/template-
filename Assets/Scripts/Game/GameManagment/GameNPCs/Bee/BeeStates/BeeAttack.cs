@@ -6,7 +6,7 @@ namespace Game
     public class BeeAttack : IState
     {
         private Animator _animator;
-        private Transform _transform;
+        private Transform _transform;        
         public BeeAttack(Transform transform, Animator animator)
         {
             _transform = transform;
@@ -20,7 +20,7 @@ namespace Game
 
         public void Execute()
         {
-            _animator.SetBool("Attack", true);
+            _animator.SetBool("Attack", true);            
         }
 
         public void Exit()

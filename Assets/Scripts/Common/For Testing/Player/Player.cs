@@ -10,7 +10,6 @@ public class Player: MonoBehaviour
         _rigidbody.useGravity = false;
     }
 
-
     private void Update()
     {
         float vertical = PlayerInput.Vertical;
@@ -18,5 +17,4 @@ public class Player: MonoBehaviour
 
         _rigidbody.AddForce(0,0,vertical*moveSpeed);
     }
-
 }

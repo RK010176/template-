@@ -11,11 +11,11 @@ namespace Game
 
         private void Awake()
         {
-            GetComponentInParent<Health>().OnHealthPctChanged += HandleHealthChanged;
+            GetComponentInParent<PlayerController>().OnHealthPctChanged += HandleHealthChanged;
         }
 
         public void HandleHealthChanged(float pct)
-        {
+        {            
             StartCoroutine(ChangeToPct(pct));
         }
 

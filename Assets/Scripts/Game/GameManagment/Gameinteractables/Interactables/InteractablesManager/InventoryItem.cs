@@ -8,30 +8,28 @@ namespace Game
     {        
         [SerializeField] private Item _item;
         [SerializeField] private ItemsHandler _handler;
+        public GameObject Interactables;
 
         private void Start()
-        {
+        {            
             string InteracableOS = "Interacables/" + gameObject.transform.GetChild(0).name.Replace("(Clone)", "");            
-             _item =  Resources.Load(InteracableOS) as Item;
-            _handler = GameObject.Find("InventoryMamager").GetComponent<ItemsHandler>();
+            _item =  Resources.Load(InteracableOS) as Item;
+            _handler = GameObject.Find("Inventory").GetComponent<ItemsHandler>();
+            Interactables = GameObject.Find("Interactables");
+            transform.parent = Interactables.transform;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             // if player
             if (other.tag == "Player")
-            {
-                //Debug.Log(name);                
+            {                
                 _handler.PickItem(_item);
-                Destroy(gameObject);
+                // set inactive in scene                
+                gameObject.SetActive(false);
             }
-           
         }
 
-        private void OnTriggerExit(Collider other)
-        {
-            
-        }
     }
 
 }

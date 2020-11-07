@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using Common;
+using System.Collections;
 
 namespace Game
 {  
     public class ChickenController : Controller
     {
         private bool _isFood = false;
+        private bool _isPlayer = false;        
         protected override void Brain(Vector3 _playerPosition, Vector3 FoodPos)
         {            
             _playerDistance = (transform.position - _playerPosition).magnitude;
@@ -25,9 +27,18 @@ namespace Game
             }
             else // -> player found 
             {
-                if (_playerDistance < 2 && _playerPosition != Vector3.zero)
-                    Run(_playerPosition);
+                if (_playerDistance < NpcBehaviors.StopAttackRadios && _playerPosition != Vector3.zero)                
+                    Attack();                                    
+                else if (_playerDistance < NpcBehaviors.AttackRadios && _playerPosition != Vector3.zero)
+                    Run(_playerPosition);                
             }
+        }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.transform.tag == "Player")
+                _isPlayer = true;
+            else if (collision.transform.tag == "Food")
+                _isFood = true;
         }
 
         #region States functions
@@ -71,12 +82,27 @@ namespace Game
             { _stateMachine.SetState(new Standing(transform, _animator, NpcBehaviors.MovingSpeed));
                 _audioManager.PlaySound(0, false);
             }
-        }
-        private void OnCollisionEnter(Collision collision)
+        }                 
+        private void Attack()
         {
-            if (collision.transform.tag == "Food")
-                _isFood = true;
-        }        
+            if (_stateMachine.GetCurrentState() != "Game.Attacking")
+            {
+                _stateMachine.SetState(new Attacking(transform, _animator, NpcBehaviors.FastMovingSpeed ));
+                _audioManager.PlaySound(1, true);
+                StartCoroutine(EffectPlayerHealth());
+            }
+            NPCRotateToTarget(_playerPosition);
+            _isPlayer = false;
+            
+        }
         #endregion
+
+
+
+        private IEnumerator EffectPlayerHealth()
+        {
+            _health.Value -= 15f;
+            yield return new WaitForSeconds(1);
+        }
     }
 }

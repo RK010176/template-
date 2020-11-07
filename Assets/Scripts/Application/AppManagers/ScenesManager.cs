@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 namespace App
 {
     public class ScenesManager : MonoBehaviour
-    {
-
+    {       
         public FloatVal LoadingProcessValue;
         private string scene;
 
